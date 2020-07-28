@@ -1,0 +1,41 @@
+### January 6, 2020
+
+---
+
+#### Assignments
+
+7 Total Assignments
+
+1 Grading gift (Late)
+
+#### Homework Quizzes
+
+Likely a couple a week
+
+#### Exams
+
+2 Midterms
+
+1 Final
+
+#### Assignment 1: Linked List Review - Word Ladder Problem
+
+Change one letter at a time to work from one word to another, each word in the middle needs to be valid.
+
+Goal: Find shorted path to change words
+
+Announce when there is no solution
+
+Will have a dictionary file to refer to
+
+##### Two Methods:
+
+Brute Force - Try all possibilities
+
+Greedy Solution - Find Best Moves
+
+##### Tips
+
+Find shortest word with most letter matches
+
+Track used words to avoid cycles (Consider removing them from dictionary).
