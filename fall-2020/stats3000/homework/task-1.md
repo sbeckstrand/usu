@@ -60,15 +60,15 @@ Q3: Are there different subgroups of gamers or are they a homogenous population?
 
 "Older Gamers": Aged 42-77
 
-More females than there are males. Mostly Democratic. Dont believe most gamers are male. Belive games are helpful. Dont believe games relate to violence.
+More females than there are males. Mostly Democratic. Don't believe most gamers are male. Believe games are helpful. Don't believe games relate to violence.
 
 "Younger Gamers": Aged 18-40
 
-Mostly male. Mostly unmarried without children. Mostly Democratic. Believe most gamers are male. Belive games are helpful. Dont believe games relate to violence.
+Mostly male. Mostly unmarried without children. Mostly Democratic. Believe most gamers are male. Believe games are helpful. Don't believe games relate to violence.
 
 "Family Gamers": Aged 22-44 -
 
-Mostly male (slightly). Most likely to have kids under 18. Almost evenly split democratic/republican. Belive games are helpful. Believe games relate to violence.
+Mostly male (slightly). Most likely to have kids under 18. Almost evenly split democratic/republican. Believe games are helpful. Believe games relate to violence.
 
 ##### Study Design
 
@@ -76,7 +76,7 @@ I am not sure if age and/or background would play a factor in who would be willi
 
 If it did play a factor (which I think is likely) that could skew the results since it may skew results, such as if it targets more students, employed adults in a higher paying field, etc.
 
-Obviously these are things that can be checked, but im not sure if they are checked for balance here.
+Obviously these are things that can be checked, but I'm not sure if they are checked for balance here.
 
 ---
 
@@ -101,12 +101,16 @@ Are depression symptoms more prevalent in adults during the COVID-19 pandemic th
 
 ##### Data collection
 
-6506 US residents.
+6506 US residents (5065 from before pandemic, 1441 during.) completed a survey distributed by NORC at the University of Chicago between March 31, 2020 and April 13, 2020. This survey aimed to gauge exposure to COVID-19, stressors, and current state of mental health.
 
 ##### Population
 
-Whole US population
+Whole US population with a valid address (Excluding those with only P.O. Box addresses)
 
 ##### Results
 
+The prevalence of depression symptoms was higher in every category during the COVID-19 pandemic as opposed to before the pandemic. It is also suggested that higher risk of depression symptoms is associated with preexisting stressors such as having low income, not having $5000+ in savings, etc.
+
 ##### Study Design
+
+To be honest, I cant find any fault with their study. I think they had a sufficient sample size and that the results are what most would expect. The study seems to have taken place as a confirmation.
