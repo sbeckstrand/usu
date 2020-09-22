@@ -52,3 +52,65 @@ Pt 1: Gravitational force that acts on an Electron:
 Pt 2 + Pt 3: Expression for separation & Solving
 
 ![20-14 Answer](../assets/images/homework/hw1-3.jpg)
+
+### * Exercise 20.22
+
+#### Question
+
+A proton is at the origin and an electron is at the point x = 0.37 nm , y = 0.30 nm .
+
+Find the electric force on the proton.
+
+#### General Steps
+
+
+
+### Exercise 20.23
+
+
+
+### Exercise 20.28
+
+
+### Exercise 20.29
+
+
+
+### Exercise 20.34
+
+
+
+### * Exercise 20.35
+
+
+
+### Exercise 20.44
+
+
+
+### Exercise 20.49
+
+
+
+
+### Exercise 21.17
+
+
+
+### Exercise 21.19
+
+
+
+
+### * Exercise 21.21
+
+
+### Exercise 21.22
+
+
+### Exercise 21.17
+
+
+
+
+### Exercise 21.31
