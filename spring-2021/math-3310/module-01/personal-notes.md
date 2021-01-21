@@ -12,6 +12,8 @@ Group dynamics are highly encouraged
 
 #### 0.1 Helping Undergraduates Learn to Read Mathematics
 
+01/19/2020
+
 We are taught to read at a young age and there is an expection to improve reading ability throughout all phases of school. Typically our reading ability is associated with literature and history but rarely is it expected that our ability to read mathematics will improve. 
 
 Typically we rely most on lectures and discussions for learning and consider mathematic reading as supplimentary ("Fill in the gaps"). Because of this, there is a lack of proficiency in reading mathematics in undegraduate students. 
@@ -75,6 +77,8 @@ Relying on lecture materials and problems results in a reliance on others to lea
 
 #### 1.1 General Background of Set Theory & Mathematical Logic
 
+01/19/2020
+
 **Syllogism** - basis of logic. It has a major and minor premise and a conclusion. 
 
 Exercise: Come up with your own syllogism: 
@@ -102,6 +106,50 @@ Assuming that the same definition of 'good' and 'cheap' are being applied in bot
 
 
 #### 1.2 Mathematic Logic (Symbolic Logic)
+
+01/20/2020
+
+Syllogisms have two properties: Validity and Soudness
+
+A Syllogism can be valid but not sound. If a syllogism is sound, it is also valid. 
+
+A syllogism is **sound** if it is not only valid, but if its premise is also true. 
+
+###### Problem 1.2.1:
+
+Complete this syllogism: (Answer italicized)
+
+* All fish can breath underwater
+* Socrates was a fish
+* *Socrates can breath under water*
+
+In this example, we can see that it is Valid as the conclusion follows off our premise. However, we know it is not sound since Socrates was not a fish. (Also, can all fish breathe under water? I thought Whales had to get water above the surfaec and stored it. Technically they are breathing under water but with oxegen from above water :thinkingface:). In any case, valid, not sound. 
+
+###### Problem 1.2.2
+
+Explain why this syllogism is Valid: (Answer italicized)
+
+* Everybody loves my baby
+* My baby loves only me. 
+* Therefore, I am my own baby. 
+
+*The conclusion follows the logic of our premise. Concluding that I am my own baby does not contradict either premise that everybody loves my baby and that my baby loves only me. However, as we know you cannot be your own baby our conclusion would not be true, thus the syllogism is not sound.* 
+
+###### Problem 1.2.3
+
+Explain why this syllogism is valid: (Answer italicized)
+
+* Everybody loves a lover
+* Romeo Loves Juliet
+* Therefore Trump Loves Obama
+
+*The conclusion follows the logic of our premise as Obama has a wife and two daughters, so he is a lover. If everybody loves a love, then it is valid to say that Trump loves obama. However, the syllogism is not sound as not everbody loves a lover.*
+
+
+
+
+
+
 
 
 
