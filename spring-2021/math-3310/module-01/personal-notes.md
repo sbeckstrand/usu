@@ -145,11 +145,56 @@ Explain why this syllogism is valid: (Answer italicized)
 
 *The conclusion follows the logic of our premise as Obama has a wife and two daughters, so he is a lover. If everybody loves a love, then it is valid to say that Trump loves obama. However, the syllogism is not sound as not everbody loves a lover.*
 
+#### 1.3 Sets
 
+A **Set** is a collection of objects. 
 
+The primary concept or notion of sets is *membership*
 
+A set can be a subset of another set if all items in the first setset are in the other set.
 
+**Problem 1.3.1.**
 
+*Let H be the set of all humans, and W be the set of all women. Is W a subset of H?* 
+
+All women are humans, so every item in W would also be in H. So yes, W is a subset of H. 
+
+**Problem 1.3.2**
+
+*Using the ideas presented so far, how would you describe two sets are equal to one of each other?*
+
+If two sets are equal to each other, they are subsets of each other. 
+
+#### The Empty Set
+
+*Example: Suppose the preisdent of a student club say, "All members with red hair wear berets." But also suppose that there are no members with red hair in the club. Is the president's statement to be considered true, false or neither?*
+
+Since there are not any red haired club members, we would say the set of red haired people is an empty set. Because the answer is not fault, we know it is true. 
+
+**Problem 1.3.3**
+
+Given any property P about the empty set, should it be considered true, false or neither? The choice universally agreed apon by mathematicians is true. How might you defend your conclusion?
+
+Every property of an empty set is considered to be true because the only way for it to be false is if there is an object that does not meet the condition(s) of a property and because its an empty set, there is no object that would fail to mee the condition(s)
+
+##### If-Then
+
+If-Then is a conditional statement in that if one thing occurs, there is a follow-up. Truthhood or Falsehood can result of an If-Then statement
+
+*Example: If you earn an A in Math 3310, your teacher will buy you a Porche*
+
+Possible outcomes: 
+
+* You get an A, teacher buys you a porche: True
+* You get an A, the teacher does not buy you a porche: False
+* You do not get an A, but the teacher buys them a porche anyway: True (Teacher didnt say they wouldn't buy a Porche if you didnt get an A)
+* You do not get an A, and the teacher does not buy you a Porche: True (Teacher didnt break their word, so we assume they kept it)
+
+**Problem 1.3.4**
+
+*Use the proceeding reasoning to explain why the empty set is a subset of every set*
+
+If every element in an empty set possesses a property, then every item in the empty set would meet he propertie(s) of objects in a set, thus making the empty set a subset of every other set.  
 
 
 
