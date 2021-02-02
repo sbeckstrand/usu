@@ -196,7 +196,31 @@ Possible outcomes:
 
 If every element in an empty set possesses a property, then every item in the empty set would meet he propertie(s) of objects in a set, thus making the empty set a subset of every other set.  
 
+#### 1.4 Boolean Operations on Sets
 
+**Union**: A set that combines the elements in two other sets
+
+*Note: Elements in a set do not get duplicated*
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A U B = {1, 2, 3, 4}. You do not have two 2s and two 3s.
+
+**Intersection**: A set of only the elements in the two intersecting sets. 
+
+*Note: If two sets do not share any elements, their intersection is the empty set*
+
+*Note: Empty set != 0*
+
+**Compliment**: A set of items that are *not* shared with the original set. 
+
+Compliments are noted with a line above object.
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A C B = {4}
+
+**Difference**: A set that only includes elements that are in the original set and not the set we are taking the difference of. 
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A - B = {1}
+
+Venn Diagrams are a great way to represent boolena operations
 
 
 
