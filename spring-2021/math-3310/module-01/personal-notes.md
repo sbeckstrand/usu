@@ -217,6 +217,77 @@ Consider you have a venn diagram including 4 overlaping sets. You will have 8 re
 
 2^n -> 2^4 = 16
 
+## 1.6 The Size of a Set
+
+Sets can be finite or infinte. 
+
+**Problem 1.6.1**
+
+*If a set A has exactly three elements, how many subsets are there?*
+
+Empty set = 1 subset (The empty set)
+
+{1}. = {1},  Empty set -> Two subsets
+
+{1, 2} = {1, 2}, {1}, {2}, the empty set -> 4 subsets
+
+{1, 2, 3} = {1, 2, 3}, {1}, {2}, {3}, {1, 2}, {1, 3}, {2, 3}, empty set -> 8 subset
+
+**Problem 1.6.2**
+
+*If a set A has exactly four elements, how many subsets are there?*
+
+total number = 2^n
+
+
+
+If you consider how many subsets exist without one of the items, half of them do not have the item and half of them do. 
+
+Suppose a set as X elements, and suppose there are 2^n subsets (just suppose since we do not know for sure. ), let Y an element that is NOT in X. Consider the set {y}. Notice the set {y} is not a subset of X. Now build another set, A = X ∪ {y}. How many elements are in A? 
+
+Well, X had n, and {y} = 1 element. A should have n + 1 elements. We know that if we take 
+
+
+
+If you have a set with n objects {1, 2, 3, 4, 5, ... , n }
+
+how many ways can you build a subset with w/ :
+=======
+
+#### 1.4 Boolean Operations on Sets
+
+**Union**: A set that combines the elements in two other sets
+
+*Note: Elements in a set do not get duplicated*
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A U B = {1, 2, 3, 4}. You do not have two 2s and two 3s.
+
+**Intersection**: A set of only the elements in the two intersecting sets. 
+
+*Note: If two sets do not share any elements, their intersection is the empty set*
+
+*Note: Empty set != 0*
+
+**Compliment**: A set of items that are *not* shared with the original set. 
+
+Compliments are noted with a line above object.
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A C B = {4}
+
+**Difference**: A set that only includes elements that are in the original set and not the set we are taking the difference of. 
+
+Ex: A = {1, 2, 3}, B = {2, 3, 4} -> A - B = {1}
+
+Venn Diagrams are a great way to represent boolena operations
+
+0 elements: 1 (empty set) (n choose 0)
+
+1 element: n (n choose 1)
+
+2 elements: (n choose 2)
+
+**Powerset** Set of all subsets
+
 
 
 
