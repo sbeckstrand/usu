@@ -93,4 +93,69 @@ Cellular respiration involves many checmical reactions:
 
 3) Electron transport chain
 
+## Photosynthesis: The Big Picture
+
+Photosynthesis converts light energy into checmical energy (glucose).
+
+Conducted in cloroplast (organelle)
+
+### Plat cells: Cloroplasts
+
+The pigment **chlorophyll** captures light energy in the red and blue regions of the visible light spectrum. 
+
+Green light is not absorbed and is relfected, giving plants their green appearance. 
+
+Steps: 
+
+1) Plants pick up water
+
+2) Carbon dioxide enters through **stomata** in leaves
+
+* Stomata is an opening in the leaves where carbon dioxide comes in and water and O_2 leaves. 
+
+3) Cholrophyll in chloroplasts captures energy from sunlight
+
+
+
+Inputs: 
+
+Carbon dioxide
+
+Water 
+
+Light Energy
+
+
+
+Outputs: 
+
+Glucose
+
+Oxygen
+
+
+
+## Photosynthesis: Light Reactions
+
+Step 1: Energy from sunlight excites elecrons in clorophyll
+
+Step 2: Water is split to provide electrons and oxygen released as a by-product
+
+Step 3: Electrons flow down electron transport chain, releasing energy and creating H+ ion gradient
+
+Step 4: H+ ions move across membrane down concentration gradient through ATP synthase, generating ATP. NADP+ (electron carrier) accepts electrons and NADPH is generated
+
+
+
+### Photosynthesis: Calvin Cycle: 
+
+Energy from ATP and NADPH used to convert cabon dioxide to glucose
+
+
+
+
+
+
+
+
 
