@@ -295,13 +295,172 @@ how many ways can you build a subset with w/ :
 
 
 
+## 1.8 Sets and Vampires
+
+**Problem 1.8.1** 
+
+*Pretend two vampires, Vladamir and Countess Elizabeth Bathory, are playing a guessing game. The cuontess writes a positive integer on the inside of her coffin. Each day, Vlad gets one guess at the number. What would be a strategy for vlad to eventually guess the correct number the countess has written on the inside of her coffin?*
+
+One option: let k be the number, Vlad starts with 1 and increases by 1 every day. 
+
+**Problem 1.8.2**
+
+*Same as last problem with with any integer*
+
+Option: let k be the number. Vlad starts with 1 and alternates the positive and nagative value of an integer and incriments by one. Example: 1, -1, 2, -2, 3, -3. 
+
+**Problem 1.8.3**
+
+Countess writes TWO positive integers and vlad has to guess both numbers in the same day. 
+
+One option: Create an array where the first number is the x axis and the second number is the y axis. Each cell has both numbers from their axis and move down the list. Example: (1, 1) -> (2, 1) -> (1, 2) -> (3, 1) -> (2, 2) -> (3, 1), etc
+
+**Problem 1.8.4**
+
+*Countess wrtes a fraction on the inside of her coffin instead of an integer).*
+
+Hmm...
+
+**Problem 1.8.5**
+
+*Countess writes a set of numbers**
+
+Example: {7, 12, 3, 8, 21}
+
+**Problem 1.8.6**
+
+*Countess writes or describes a set of positive integers but this time it can be an infinte set. The catch is that Vlad has an infinitely large sized book with the list of sets to guess. The Countess obtains a copy of this book. Is there a way for her to construct a set that is not in this book? 
+
+## 1.9 Infinite Sets and Georg Cantor
+
+*Theorem 1.9.1* (Cantors Theorem):
+
+For any set A, the power set, is numerically larger than A. 
+
+Continuing that theorem, the power set of a power set is larger than the original power set. 
+
+Also, if A is an infinite set, its power set is a larger infinity. 
+
+**Problem 1.9.1**
+
+*Is the union of denumerable sets necessarily denumerable?*
+
+Yes. 
+
+**Problem 1.9.2**
+
+*Is the set of all infinite sets of natural numbers denumerable?*
+
+No. If Natural nubmers are infinite, the powerset of the set of nautral numbers is an even larger infinity where there is no longer a 1-1 relation to elements. 
 
 
 
 
+## A Paper on Relations
+
+A relation links objects and structures. It is considered a fundamental to mathematics. Relations are considered to fall under 6 categories. 
+
+If A has n elements. There are n^2 relations from AxA
+
+Note: Relation is a set!
+
+Note: You can have <=, <, >, >= and = relations
+
+### Equivalence Relations
+
+Special collection of relations 
+
+#### Reflexive relations
+R is *reflexive* if ∀x ∈ A[xRx];
+
+*Example:*
+
+A = {2, 3, 4, 5, 6, 7}. 
+
+AxA = {(2,2), (2,3), (2,4), ... , (7,7)}
+
+A relationship is reflexive if x in A exists in the relationship in the form of (x, x)> in the above example, it does contain (2,2), (3,3), (4,4), (5,5), (6,6), and (7,7), so it is reflexive. 
+
+#### Symmetric Relations
+R is *symmetric* if ∀x, y ∈ A[xRy → yRx];
+
+Basically this states that if you have (x, y) in the relationship set, (y, x) needs to be in the set too)
+
+#### Transitive
+R is *transitive* if ∀x,y,z ∈ A[(xRy∧yRz) → xRz];
+
+Basically, this states that if your have (x, y) AND (y, z) in the relation set, it also needs to have (x,z) for it to be transitive.
+
+### Descriptive Ordering Relations
+
+#### Antisymmetric Relations
+
+R is *antisymmetric if ∀x,y ∈ A[(xRy∧yRx) → x=y];
+
+This relation suggests that if you have (x, y) and (y, z) in your relation, that x equals y. 
+
+#### Asymmetric Relations
+
+R is *asymmetric if ∀x, y ∈ A ∼ [xRy → yRx], or equivalently, ∀x, y ∈ A [xRy → y!Rx]
+
+This relation suggests that if you have (x, y) in your relation, you do not have (y, x)
+
+#### Irreflexive Relations\
+
+R is irreflexive if ∀x ∈ A [x!Rx].∂
+
+This relation suggests that for every x in A, your relation does not contain (x, x)
+
+### Relation Theorems
+
+**Theorem 1**: If R is asymmetric, then it is antisymmetric
+
+**Theorem 2**: If R is asymmetric, then it is irreflexive
+
+**Theorem 3**: If R is reflexive, then it is NOT irreflexive
+
+**Theorem 4**: If R is antisymmetric and irreflexive, then it is asymmetric
+
+**Theorem 5**: If R is irreflexive and transitive, then it is asymmetric.
+
+**Theorem 6**: If R is symmetric and antisymmetric, then it is transitive.
+
+**Theorem 7**: The only relation that is both symmetric and asymmetric is the empty relation. 
+
+## 1.13 Injective, Surjective and Bijective
+
+Think of functions as if they have qualities, attributes and even personalities. 
+
+**Functions**: A releation between X and Y and is denoted as: 
+
+f: X -> Y
+
+### Injective
+
+**Injective**: Multiple different values of x will not result in the same value of y 
+
+If f(x) = f(y), x = y. 
+
+Also worth noting that if x != y, f(x) != f(y)
+
+### Surjective
+
+**Surjective): For all y in the possible outcomes of Y, and there exists an x in the possible values of x such that f(x) = y. 
+
+This means that there is a value that can be supplied into a function to achieve all possible values of y. 
+
+Essentially, all possible values of Y can be achieved. A function is still surjective if multiple values of x have the same value of y. 
+
+## Bijective
+
+Bijective is when the function is both Injective and Surjective. Basically this means there is a one-to-one relation for every value of x to y. 
 
 
+## Canto's THeorem.. Again
 
+We previously discussed Cantor's theorem and used contradiction to prove it. This time around, we can use the knowledge of functions to prove it using construction. 
 
+Note, for two sets to have the same cardinality, there must be a bijection between them. 
 
+The idea of the construction proof is to show that  you can have an injection from a set to its power set, but there does not exist a surjection, which means there can be no bijection. 
 
