@@ -1,0 +1,30 @@
+/filter {
+    1 dict begin
+        
+        count 0 gt 
+            {
+                /block exch def
+
+                count array
+                astore
+                /a exch def
+
+                a 
+                    {
+                        dup
+                        /y exch def
+                        
+                        block
+                            {
+
+                            }
+                            {
+                                y
+                            }
+                        ifelse
+                    }
+                forall
+            }
+        if
+    end
+} def

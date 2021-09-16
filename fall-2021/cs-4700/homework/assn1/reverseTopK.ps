@@ -1,0 +1,34 @@
+/reverseTopK {
+    1 dict begin
+    
+        count 0 gt
+            {
+                /input_number exch def
+                count 0 gt 
+                    {
+                        input_number array
+                        /a exch def
+
+                        input_number 1 sub
+                        /updated_number exch def
+
+                        0 1 updated_number 
+                            {
+                                /current_index exch def
+                                /current_value exch def
+                                a current_index current_value put
+                            } 
+                        for
+
+                        a
+                            {
+                                /current_array_value exch def
+                                current_array_value
+                            }
+                        forall
+                    }
+                if  
+            }
+        if
+    end
+} def

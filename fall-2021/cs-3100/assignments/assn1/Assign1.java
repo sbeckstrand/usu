@@ -1,8 +1,10 @@
-import java.math.BigInteger;
-
 public class Assign1 {
     
-    // Main function
+    /**
+    Main function. 
+    
+    This is our controller function which takes command line arguments, validates that an appropriate number of arguments were provided and then validates that the argument is for a valid method. If valid, it checks if an integer value was provided and if so, passes the value to the corresponding method to handle further validation and computing. Once handled by method, it prints the method's output back to the terminal.  
+    */
     public static void main(String[] args){
         
         // If no arguments are provided, throw error and return help message
@@ -20,27 +22,18 @@ public class Assign1 {
                         int paramValue = Integer.parseInt(args[i + 1]);
                         
                         if (args[i].equals("-fib")) {
-                            if (paramValue < 0 || paramValue > 40) {
-                                System.out.println("Fibonacci valid range is [0, 40]");
-                            }
-                            else {
-                                System.out.println(fibonacci(paramValue));
-                            }
+                            System.out.println(fibonacci(paramValue));
                         } 
                         else if (args[i].equals("-fac")) {
-                            if (paramValue < 0 || paramValue > 2147483647) {
-                                System.out.println("Factorial valid range is [0, 2147483647]");
-                            }
-                            else {
-                                System.out.println(factorial(paramValue));
-                            }
+                            System.out.println(factorial(paramValue));
                             
                         } 
                         else if (args[i].equals("-e")) {
-                            euler(paramValue);
+                            System.out.println(euler(paramValue));   
                         }
                     }
                     catch (Exception e) {
+                        System.out.print(e);
                         System.out.println(args[i + 1] + " is not a valid value for " + args[i]);
                         help();
                     }
@@ -55,35 +48,113 @@ public class Assign1 {
         }
     }
     
-    public static int fibonacci(Integer value) {
-        if (value <= 1) {
-            return value;
-        }
+    /**
+    Primary fibonacci function.
+    
+    Used to validate provided value and either return the computed fibonacci number or explain any issues with input. 
+    */
+    public static String fibonacci(Integer value) {
         
-        return fibonacci(value - 1) + fibonacci(value - 2);
-    }
-
-    public static BigInteger factorial(Integer value) {
-            BigInteger factorialResult = BigInteger.valueOf(1);
-            
-            for (int i=1; i <= value; i++) {
-                factorialResult = factorialResult.multiply(BigInteger.valueOf(i));
-            }
-            
-            return factorialResult;
+        // Validate provided value
+        if (value < 0 || value > 40) {
+            return "Fibonacci valid range is [0, 40]";
+        }
+        // If valid, rely on helper method to calculate the fibonacci value and return it 
+        else {
+            Integer fibonacciValue = computeFibonacci(value);
+            return String.format("Fibonacci of %d is %d", value, fibonacciValue);
+        }
     }
     
-    public static void euler(Integer value) {
-        // Value Validation
-        if (value < 1 || value > 2147483647) {
-            System.out.println("Valid range for e is [1, 2147483647]");
+    /**
+    Helper method for fibonacci. 
+    
+    This recursive method works through the formula f_(n-1) + f_(n-2) until the value is 1.
+    */
+    public static int computeFibonacci(Integer value) {
+        if (value <= 1) {
+            return 1;
+        }
+        
+        return computeFibonacci(value - 1) + computeFibonacci(value - 2);
+    }
+    
+    
+    /**
+    Primary factorial function. 
+    
+    Used to validate provided value and either return the computed factorial value or explain any issues with input. 
+    */
+    public static String factorial(Integer value) {
+        if (value < 0 || value > 2147483647) {
+            return "Factorial valid range is [0, 2147483647]";
         }
         else {
-            
+            BigInteger factorialValue = computeFactorial(value);
+            return String.format("Factorial of %d is %d", value, factorialValue);
         }
     }
 
-    // Help function
+    /**
+    Helper method for factorial. 
+    
+    This method uses a for loop to iterate through each number 1-n and multiply each number number by each other. 
+    */
+    public static BigInteger computeFactorial(Integer value) {
+        BigInteger factorialResult = BigInteger.valueOf(1);
+        
+        for (int i=1; i <= value; i++) {
+            factorialResult = factorialResult.multiply(BigInteger.valueOf(i));
+        }
+        
+        return factorialResult;
+    }
+    
+    /**
+    Primary Euler function. 
+    
+    Used to validate provided value and either return the computed value for e, approximated based on the number of iterations specified. 
+    */
+    public static String euler(Integer value) {
+        if (value < 1 || value > 2147483647) {
+            return String.format("Valid range for e is [1, 2147483647]");
+        }
+        else {
+            BigDecimal eulerValue = computeEuler(value);
+            return String.format("Value of e using %d iterations is %.16f", value, eulerValue);
+        }
+    }
+    
+    /**
+    Helper method for euler function. 
+    
+    This method uses the following formula to calculate e to the n iterations: 1/0! + 1/1! + 1/2! + ... + 1/n!
+    */
+    public static BigDecimal computeEuler(Integer value) {
+        BigDecimal eResult = BigDecimal.valueOf(0);
+        
+        
+        for (int i = 0; i < value; i++) {
+            BigDecimal numorator = BigDecimal.valueOf(1.0);
+            BigDecimal denominator = new BigDecimal(computeFactorial(i));
+            
+            
+            BigDecimal result = numorator.divide(denominator, 16, RoundingMode.HALF_UP);
+            
+            eResult = eResult.add(result);
+            
+        }
+        
+        return eResult;
+    }
+
+    /**
+    Help function. 
+    
+    Should input validation fail in the main function or it's methods, a message will be provided to the enduser highlighting the issue and then this method is used to highlight valid syntax when using the application. 
+    */
+    
+     
     public static void help(){
         System.out.println("\n--- Assign 1 Help ---");
         System.out.println("\t-fib [n] : Compute the Fibonacci of [n]; valid range [0, 40]");

@@ -1,0 +1,29 @@
+/remove {
+    % Push a new dictinary onto dictionary stack to track assignements specified in our remove function. 
+    1 dict begin
+        count 0 gt 
+            {
+                % Take the provided argument, remove it from the top of the stack and assign it to a variable
+                /x exch def
+
+                % Create an array equal to the size of our stack, store all the items in the stack in the array, and then remove the array itself from the stack and assign it to a variable. 
+                count array
+                astore
+                /a exch def
+                
+                % Loop through each item in our array. If it matches the provided argument, pop it, if it does not match, return it to the stack
+                a 
+                    {
+                        /y exch def
+                        x y eq 
+                            {}
+                            { 
+                                y
+                            }
+                        ifelse
+                    }   
+                forall
+            }
+        if
+    end
+} def
