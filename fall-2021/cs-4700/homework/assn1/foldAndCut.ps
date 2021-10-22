@@ -1,3 +1,63 @@
-/foldAndCut {
+% Create a shape to draw
+/shape {
+  
+  % Create new dictionary to track assignments relative to the shape
+  1 dict begin
 
+    % Save current state of graphical environment and then define and draw the shape. 
+    gsave
+      newpath
+        100 0 moveto
+        20 20 lineto
+        25 30 lineto
+        20 40 lineto
+        25 50 lineto
+        20 60 lineto
+        0  100 lineto
+        0 0 lineto
+        80 0 lineto
+      closepath
+      fill
+      stroke
+    grestore
+  end
 } def
+
+% Define function to fold our environment and cut our shape into it.
+/foldAndCut {
+    % Create new dictionary to track assignments relative to our folding and final cut. 
+    1 dict begin
+        % Make sure an argument was provided
+        count 1 eq 
+            {
+                /folds exch def
+
+                % Base case of our recursive function is that there are no more folds to make. If there are no more folds, cut. 
+                folds 0 eq
+                    {
+                        shape
+                    }
+
+                    % Otherwise, if there are still folds to make, save the current graphical environment, scale our envionrment down by half and then switch between the x and y axis to split the environment into four sections and make a recursive call to this function in each section. Once it gets odwn to 0, it will draw the shape in each square. 
+                    {
+                        1 dict begin
+                            gsave
+                              0.5 0.5 scale
+                              100 100 translate
+
+                              folds 1 sub foldAndCut
+                              -1 1 scale
+                              folds 1 sub foldAndCut
+                              1 -1 scale
+                              folds 1 sub foldAndCut
+                              -1 1 scale 
+                              folds 1 sub foldAndCut
+                            grestore
+                        end
+                    }
+                ifelse
+            }
+        if
+    end
+} def
+

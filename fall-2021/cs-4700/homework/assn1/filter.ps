@@ -1,14 +1,21 @@
 /filter {
+    
+    
+    % Create new dictionary to track assignments
     1 dict begin
-        
+    
+        % Make sure at least one argument is provided
         count 0 gt 
             {
+                % Take the provided argument, which should be a block of logic, remove it from the top of the stack and assign it to a variable
                 /block exch def
 
+                % Create an array equal to the size of our stack, store all the items in the stack in the array, and then remove the array itself from the stack and assign it to a variable. 
                 count array
                 astore
                 /a exch def
 
+                % Loop through each item in our array. Because we cannot pass an additional value to our defined block of code, we will duplicate the value currently being iterated and put it back on the top of the stack. If it matches the provided argument, pop it (This is being done in the loop, we are just not returning it to the stack), if it does not match, return it to the stack
                 a 
                     {
                         dup

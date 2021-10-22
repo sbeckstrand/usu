@@ -12,8 +12,8 @@ public class Cd {
         } 
         else {
             if (arguments[1].startsWith("~/")) {
-                String[] removedHomeRelative = arguments[1].split("~/", 1);
-                updatePath = String.valueOf(System.getProperty("user.home")) + removedHomeRelative[1];
+                String[] removedHomeRelative = arguments[1].split("~/");
+                updatePath = String.valueOf(System.getProperty("user.home")) + removedHomeRelative[0];
             } else if (arguments[1].startsWith("/")) {
                 updatePath = arguments[1];
             } else if (arguments[1].equals("..") || arguments[1].equals("../")) {

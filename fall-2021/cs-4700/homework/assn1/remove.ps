@@ -11,7 +11,7 @@
                 astore
                 /a exch def
                 
-                % Loop through each item in our array. If it matches the provided argument, pop it, if it does not match, return it to the stack
+                % Loop through each item in our array. If it matches the provided argument, pop it (This is being done in the loop, we are just not returning it to the stack), if it does not match, return it to the stack
                 a 
                     {
                         /y exch def
