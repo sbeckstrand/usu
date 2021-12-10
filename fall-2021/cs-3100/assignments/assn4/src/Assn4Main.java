@@ -6,15 +6,16 @@
 
 public class Assn4Main {
 
+
     public static void main(String[] args) {
+        /* Setup queue, result table and build their initial structor*/
         TaskQueue queue = new TaskQueue();
         ResultTable table = new ResultTable();
         queue.buildQueue();
         table.buildTable(queue.getSize());
 
+        /* Determine the number of virtual cores in computer and create that many worker threads */
         Integer logicalCores = Runtime.getRuntime().availableProcessors();
-        // Create as many worker threads as there are CPU cores
-            // Figure out how many CPU cores there are. 
 
         long start = System.currentTimeMillis();
         for (Integer i = 0; i < logicalCores; i += 1) {
@@ -28,19 +29,13 @@ public class Assn4Main {
 
 
         
-
-        
-        
-        // Output a "." for every 10th digit calculated
-
-        // When queue is empty and all threads have finished, display the value of Pi
+        /* Print Pi Results and how long it took to calculate */
         System.out.print("\n\n3.");
         for (Integer i = 1; i <= 1000; i +=  1) {
             System.out.print(table.get(i));
         }
         System.out.println("\nPi Computation took " + duration + " ms");
 
-        // Gracefully exit
     }
 
     
