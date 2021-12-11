@@ -4,9 +4,9 @@ import java.util.LinkedList;
 public class TaskMRU implements Runnable {
     private final ArrayList<Integer> seq;
     private final Integer maxFrames;
-    private final ArrayList<ArrayList<Integer>> faults;
+    private final int[] faults;
     
-    public TaskMRU(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, ArrayList<ArrayList<Integer>> pageFaults) {
+    public TaskMRU(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
         this.seq = sequence;
         this.maxFrames = maxMemoryFrames;
         this.faults = pageFaults;
@@ -15,12 +15,12 @@ public class TaskMRU implements Runnable {
     public void run()
     {
         LinkedList<Integer> frames = new LinkedList<Integer>();
-        ArrayList<Integer> currFaults = new ArrayList<Integer>();
+        int currFaults = 0;
 
         for (Integer item: this.seq) {
             
             if (!frames.contains(item)) {
-                currFaults.add(item);
+                currFaults++;
 
                 if (frames.size() == maxFrames) {
                     frames.pop();
@@ -31,5 +31,7 @@ public class TaskMRU implements Runnable {
                 frames.push(item);
             }
         }
+
+        faults[maxFrames - 1] = currFaults;
     }
 }

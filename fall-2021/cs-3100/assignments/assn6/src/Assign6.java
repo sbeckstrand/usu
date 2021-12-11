@@ -33,9 +33,9 @@ public class Assign6 {
 
         Integer total = 0;
 
-        ArrayList<ArrayList<Integer>> FIFOFaults = new ArrayList<>(2);
-        ArrayList<ArrayList<Integer>> LRUFaults = new ArrayList<>(2);
-        ArrayList<ArrayList<Integer>> MRUFaults = new ArrayList<>(2);
+        int[][] FIFOFaults = new int[1000][100];
+        int[][] LRUFaults = new int[1000][100];
+        int[][] MRUFaults = new int[1000][100];
 
         // Simulation loop
         for (Integer simulation = 0; simulation < 1000; simulation++) {
@@ -55,14 +55,14 @@ public class Assign6 {
                 total++;
                 
 
-                Runnable fifo = new TaskFIFO(sequence, frames, 250, FIFOFaults );
-                Runnable lru = new TaskLRU(sequence, frames, 250, LRUFaults );
-                Runnable mru = new TaskMRU(sequence, frames, 250, MRUFaults );
+                Runnable fifo = new TaskFIFO(sequence, frames, 250, FIFOFaults[simulation] );
+                Runnable lru = new TaskLRU(sequence, frames, 250, LRUFaults[simulation] );
+                Runnable mru = new TaskMRU(sequence, frames, 250, MRUFaults[simulation] );
 
                 // Add objects to thread pool
                 threadPool.execute(fifo);
                 threadPool.execute(lru);
-                // threadPool.execute(mru);
+                threadPool.execute(mru);
                 
                 // Determine which method has the last number of faults
                 // Ties:
@@ -103,39 +103,35 @@ public class Assign6 {
         // Report simulation time. 
         // Report many times each method had the least number of faults
         // Report anomalies. 
+        
+        for (Integer simulation = 0; simulation < 1000; simulation++) {
+            for (Integer frames = 0; frames < 100; frames++) {
+                int FIFOFaultCount = FIFOFaults[simulation][frames];
+                int LRUFaultCount = LRUFaults[simulation][frames];
+                int MRUFaultCount = MRUFaults[simulation][frames];
 
+                if (FIFOFaultCount <= LRUFaultCount && FIFOFaultCount <= MRUFaultCount) {
+                    minFIFOFaults++;
+                }
 
-        // if (FIFOFaults.size() == LRUFaults.size() && LRUFaults.size() == MRUFaults.size()) {
-        //     minFIFOFaults++;
-        //     minLRUFaults++;
-        //     minMRUFaults++;
-        // } 
-        // else if (FIFOFaults.size() == LRUFaults.size() && FIFOFaults.size() > MRUFaults.size()) {
-        //     minFIFOFaults++;
-        //     minLRUFaults++;
-        // } 
-        // else if (FIFOFaults.size() == MRUFaults.size() && FIFOFaults.size() > LRUFaults.size()) {
-        //     minFIFOFaults++;
-        //     minMRUFaults++;
-        // }
-        // else if (LRUFaults.size() == MRUFaults.size() && LRUFaults.size() > FIFOFaults.size()) {
-        //     minLRUFaults++;
-        //     minMRUFaults++;
-        // } else if (FIFOFaults.size() < LRUFaults.size() && FIFOFaults.size() < MRUFaults.size()) {
-        //     minFIFOFaults++;
-        // } else if (LRUFaults.size() < FIFOFaults.size() && LRUFaults.size() < MRUFaults.size()) {
-        //     minLRUFaults++;
-        // } else {
-        //     minMRUFaults++;
-        // }
+                if (LRUFaultCount <= FIFOFaultCount && LRUFaultCount <= MRUFaultCount) {
+                    minLRUFaults++;
+                }
 
-        // System.out.println("FILO Faults: " + minFIFOFaults);
-        // System.out.println("LRU Faults: " + minLRUFaults);
-        // System.out.println("MRU Faults: " + minMRUFaults);
+                if (MRUFaultCount <= FIFOFaultCount && MRUFaultCount <= LRUFaultCount) {
+                    minMRUFaults++;
+                }
+            }
+        
+        }
 
-        System.out.println(FIFOFaults.get(1));
+        
+
+        System.out.println("FILO Faults: " + minFIFOFaults);
+        System.out.println("LRU Faults: " + minLRUFaults);
+        System.out.println("MRU Faults: " + minMRUFaults);
     }
-    
+
     public static void test() {
 
         Integer cores = Runtime.getRuntime().availableProcessors();
@@ -143,15 +139,12 @@ public class Assign6 {
 
         ArrayList<Integer> testArray = new ArrayList<Integer>(Arrays.asList(7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0));
 
-        ArrayList<ArrayList<Integer>> faultList = new ArrayList<>(2);
-        TaskLRU lru = new TaskLRU(testArray, 4, 250, faultList );
+        int[] faultList = new int[100];
+        TaskMRU mru = new TaskMRU(testArray, 4, 250, faultList );
 
-        threadPool.execute(lru);
+        threadPool.execute(mru);
 
         
-
-       
-
 
         threadPool.shutdown();
 
@@ -163,9 +156,10 @@ public class Assign6 {
             System.out.println("Error in waiting for shutdown");
         }
 
-        System.out.println(faultList.size());
+        System.out.println(faultList[3]);
         System.out.println("+++");
 
         
     }
+
 }

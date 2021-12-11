@@ -5,11 +5,11 @@ import java.util.Queue;
 public class TaskLRU implements Runnable {
     private final ArrayList<Integer> seq;
     private final Integer maxFrames;
-    private final ArrayList<ArrayList<Integer>> faults;
+    private final int[] faults;
 
 
     
-    public TaskLRU(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, ArrayList<ArrayList<Integer>> pageFaults) {
+    public TaskLRU(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
         this.seq = sequence;
         this.maxFrames = maxMemoryFrames;
         this.faults = pageFaults;
@@ -18,14 +18,14 @@ public class TaskLRU implements Runnable {
     public void run()
     {
         LinkedList<Integer> frames = new LinkedList<Integer>();
-        ArrayList<Integer> currFaults = new ArrayList<Integer>();
+        int currFaults = 0;
 
         for (Integer i = 0; i < this.seq.size(); i++) {
             
             Integer item = this.seq.get(i);
             
             if (!frames.contains(item)) {
-                currFaults.add(item);
+                currFaults++;
 
                 if (frames.size() == maxFrames) {
                     frames.pop();
@@ -37,6 +37,6 @@ public class TaskLRU implements Runnable {
             }
         }
 
-        faults.set(maxFrames - 1, currFaults);
+        faults[maxFrames - 1] = currFaults;
     }
 }

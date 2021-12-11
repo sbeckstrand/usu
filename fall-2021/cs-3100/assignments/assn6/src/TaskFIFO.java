@@ -4,10 +4,10 @@ import java.util.LinkedList;
 public class TaskFIFO implements Runnable {
     private final ArrayList<Integer> seq;
     private final Integer maxFrames;
-    private final ArrayList<ArrayList<Integer>> faults;
+    private final int[] faults;
 
 
-    public TaskFIFO(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, ArrayList<ArrayList<Integer>> pageFaults) {
+    public TaskFIFO(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
         this.seq = sequence;
         this.maxFrames = maxMemoryFrames;
         this.faults = pageFaults;
@@ -18,13 +18,13 @@ public class TaskFIFO implements Runnable {
     public void run()
     {
         LinkedList<Integer> pageThreads = new LinkedList<Integer>();
-        ArrayList<Integer> currFaults = new ArrayList<Integer>();
+        int currFaults = 0;
 
         for (Integer i = 0; i < this.seq.size(); i++) {
             // Check if item is in linked list
             Integer item = this.seq.get(i);
             if (!pageThreads.contains(item)) {
-                currFaults.add(item);
+                currFaults++;
                 
                 if (pageThreads.size() == this.maxFrames) {
                     pageThreads.pop();
@@ -34,7 +34,7 @@ public class TaskFIFO implements Runnable {
 
         }
 
-        faults.set(maxFrames - 1, currFaults);
+        faults[maxFrames - 1] = currFaults;
     }
 
     
