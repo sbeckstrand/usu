@@ -3,13 +3,13 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 public class TaskLRU implements Runnable {
-    private final ArrayList<Integer> seq;
+    private final int[] seq;
     private final Integer maxFrames;
     private final int[] faults;
 
 
     
-    public TaskLRU(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
+    public TaskLRU(int[] sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
         this.seq = sequence;
         this.maxFrames = maxMemoryFrames;
         this.faults = pageFaults;
@@ -20,9 +20,7 @@ public class TaskLRU implements Runnable {
         LinkedList<Integer> frames = new LinkedList<Integer>();
         int currFaults = 0;
 
-        for (Integer i = 0; i < this.seq.size(); i++) {
-            
-            Integer item = this.seq.get(i);
+        for (int item: this.seq) {
             
             if (!frames.contains(item)) {
                 currFaults++;

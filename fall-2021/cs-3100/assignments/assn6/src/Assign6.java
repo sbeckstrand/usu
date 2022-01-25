@@ -14,24 +14,30 @@ import java.util.concurrent.TimeUnit;
 
 public class Assign6 {
 
+    /** main function, used to kick off the simulation function.
+            Input: 
+            - none
 
+            Output:
+            - none
+    */
     public static void main(String[] args) {
         simulate();
-
     }
 
-    public static void simulate() {
-        System.out.println("Simulate");
+    /** simulate function, used to iterate through 100,000 simulations where we range from 1-100 thread counts 1000 times and use the FIFO, LRU, and MRU methods to count page Faults with a generated array of numbers.
+            Input: 
+            - none
 
-        Integer minFIFOFaults = 0;
-        Integer minLRUFaults = 0;
-        Integer minMRUFaults = 0;
+            Output:
+            - none
+    */
+    public static void simulate() {
+        long startTime = System.nanoTime();
 
         // Create a thread pool with as many workers as there are processors available on your system. 
         Integer cores = Runtime.getRuntime().availableProcessors();
         ExecutorService threadPool = Executors.newFixedThreadPool(cores);
-
-        Integer total = 0;
 
         int[][] FIFOFaults = new int[1000][100];
         int[][] LRUFaults = new int[1000][100];
@@ -40,32 +46,25 @@ public class Assign6 {
         // Simulation loop
         for (Integer simulation = 0; simulation < 1000; simulation++) {
 
-            /* Generate sequence of integers between [1,250] */
-            ArrayList<Integer> sequence = new ArrayList<Integer>();
+            // Generate sequence of integers between [1,250] 
+            int[] sequence = new int[1000];
             
 
             for (Integer randomRange  = 0; randomRange < 1000; randomRange++) {
                 Integer randomNumber = ThreadLocalRandom.current().nextInt(1,251);
-                sequence.add(randomNumber);
+                sequence[randomRange] = randomNumber;
             }
 
-            // For each max Thread count from [1,100]
+            // For each max Thread count from [1,100], create tasks for each algorithm and add them to the thread pool
             for (Integer frames = 1; frames <= 100; frames++) {
-                
-                total++;
-                
 
                 Runnable fifo = new TaskFIFO(sequence, frames, 250, FIFOFaults[simulation] );
                 Runnable lru = new TaskLRU(sequence, frames, 250, LRUFaults[simulation] );
                 Runnable mru = new TaskMRU(sequence, frames, 250, MRUFaults[simulation] );
 
-                // Add objects to thread pool
                 threadPool.execute(fifo);
                 threadPool.execute(lru);
                 threadPool.execute(mru);
-                
-                // Determine which method has the last number of faults
-                // Ties:
                 
 
             }
@@ -75,10 +74,7 @@ public class Assign6 {
 
         threadPool.shutdown();
 
-        // while (((ThreadPoolExecutor) threadPool).getTaskCount() > 0) {
-        //     System.out.println(((ThreadPoolExecutor) threadPool).getTaskCount());
-        // }
-
+        // Verify that all threads do not have active processes.
         try {
             threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
         }
@@ -86,24 +82,32 @@ public class Assign6 {
             System.out.println("Error in waiting for shutdown");
         }
 
-        System.out.println("testing");
-        // For 1 -> 1000
-            // Generate sequence: 1000 element array where each value is a random number between 1 and 250
-            // For each memory frame couunt 1 --> 100
-                // Integer FIFOFaults, LRUFaults, MRUFaults;
-                // Create a FIFO simulation task, e.g. Runnable fifo = new TaskFIFO(p, f, 250, pageFaults)
-                // Create a LRU simulation task, e.g. Runnable lru = new TaskLRU(p, f, 250, pageFaults)
-                // Create a MRU simulation task, e.g. Runnable mru = new TaskMRU(p, f, 250, pageFaults)
-                // Add objects to thread pool
-                // Determine which method has the least number of faults
-
-
+        // Calculate runtime
+        long endTime = System.nanoTime();
+        long totalTime = (endTime - startTime) / 1000000;
         
-        // Wait for all tasks to finish
-        // Report simulation time. 
-        // Report many times each method had the least number of faults
-        // Report anomalies. 
+
+        // Generate Report
+        generateReport(totalTime, FIFOFaults, LRUFaults, MRUFaults);
         
+    }
+
+    /** GenerateReport function, Used to generate a report showing how long the appliction took to run through the simulations, the methods that had the least number of page faults and to trigger belady anomaly reporting
+            Input: 
+            - Duration (in ms) of how long application took to run
+            - FIFO faults array
+            - LRU faults array
+            - MRU faults array
+
+            Output:
+            - Does not return any values. It instead prints a report containing run time and min fault counts
+    */
+    public static void generateReport(long duration, int[][] FIFOFaults, int[][] LRUFaults, int[][] MRUFaults) {
+
+        Integer minFIFOFaults = 0;
+        Integer minLRUFaults = 0;
+        Integer minMRUFaults = 0;
+
         for (Integer simulation = 0; simulation < 1000; simulation++) {
             for (Integer frames = 0; frames < 100; frames++) {
                 int FIFOFaultCount = FIFOFaults[simulation][frames];
@@ -121,45 +125,55 @@ public class Assign6 {
                 if (MRUFaultCount <= FIFOFaultCount && MRUFaultCount <= LRUFaultCount) {
                     minMRUFaults++;
                 }
+
+                System.out.print(FIFOFaults[simulation][frames]+ ",");
+                
             }
-        
+            System.out.println("\n");
         }
 
+        System.out.println("Simulation took " + duration + " ms\n" );
         
 
-        System.out.println("FILO Faults: " + minFIFOFaults);
-        System.out.println("LRU Faults: " + minLRUFaults);
-        System.out.println("MRU Faults: " + minMRUFaults);
+        // System.out.println("FILO min PF: " + minFIFOFaults);
+        // System.out.println("LRU min PF: " + minLRUFaults);
+        // System.out.println("MRU min PF: " + minMRUFaults);
+
+        // beladyReport("FILO", FIFOFaults);
+        // beladyReport("LRU", LRUFaults);
+        // beladyReport("MRU", MRUFaults);
+        
     }
 
-    public static void test() {
+    /** beladyReport function, used to detect belady anomalies between the number of page faults for each simulation iteration.
+            Input: 
+            - Algorithm type/name
+            - two-dimensional faults array where the first dimension is a simulation and the second dimension contains the number of page faults for each frame count. 
 
-        Integer cores = Runtime.getRuntime().availableProcessors();
-        ExecutorService threadPool = Executors.newFixedThreadPool(cores);
+            Output:
+            - Does not return any values. It instead prints a series of log entires for each anomaly detected. 
+    */
+    private static void beladyReport(String type, int[][] faults) {
+        System.out.println(String.format("\nBelady's Anomaly Report for %s.", type));
 
-        ArrayList<Integer> testArray = new ArrayList<Integer>(Arrays.asList(7, 0, 1, 2, 0, 3, 0, 4, 2, 3, 0, 3, 2, 1, 2, 0, 1, 7, 0));
-
-        int[] faultList = new int[100];
-        TaskMRU mru = new TaskMRU(testArray, 4, 250, faultList );
-
-        threadPool.execute(mru);
-
-        
-
-        threadPool.shutdown();
-
-
-        try {
-            threadPool.awaitTermination(Long.MAX_VALUE, TimeUnit.DAYS);
+        int simCount = 0;
+        int anomolyCount = 0;
+        int maxDelta = 0;
+        for (int i = 0; i < faults.length; i++) {
+            for (int j = 0; j < faults[i].length - 1; j++) {
+                int faultDifference = faults[i][j + 1] - faults[i][j];
+                if (faultDifference > 0) {
+                    if (faultDifference > maxDelta ) {
+                        maxDelta = faultDifference;
+                    }
+                    anomolyCount++;
+                    String logEntry = String.format("    Anomaly detected in simulation #%03d - %03d PF's @ %03d frames vs. %03d PF's @ %03d frames (Δ%d)", simCount, faults[i][j], (j + 1), faults[i][j+1], (j + 2), faultDifference );
+                    System.out.println(logEntry);
+                }
+            }
+            simCount++;
         }
-        catch (Exception ex) {
-            System.out.println("Error in waiting for shutdown");
-        }
-
-        System.out.println(faultList[3]);
-        System.out.println("+++");
-
-        
+        System.out.println("  Anomaly detected " + anomolyCount + " times in 1000 simulations with a max delta of " + maxDelta);
     }
 
 }

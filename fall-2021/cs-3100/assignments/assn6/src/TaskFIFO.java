@@ -2,12 +2,12 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class TaskFIFO implements Runnable {
-    private final ArrayList<Integer> seq;
+    private final int[] seq;
     private final Integer maxFrames;
     private final int[] faults;
 
 
-    public TaskFIFO(ArrayList<Integer> sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
+    public TaskFIFO(int[] sequence, int maxMemoryFrames, int maxPageReference, int[] pageFaults) {
         this.seq = sequence;
         this.maxFrames = maxMemoryFrames;
         this.faults = pageFaults;
@@ -20,9 +20,8 @@ public class TaskFIFO implements Runnable {
         LinkedList<Integer> pageThreads = new LinkedList<Integer>();
         int currFaults = 0;
 
-        for (Integer i = 0; i < this.seq.size(); i++) {
-            // Check if item is in linked list
-            Integer item = this.seq.get(i);
+        for (int item: this.seq) {
+
             if (!pageThreads.contains(item)) {
                 currFaults++;
                 
