@@ -50,7 +50,7 @@ def gje(a, b):
                 augmented[[current_row, largest_index]] = augmented[[largest_index, current_row]]
 
             # Multiply row by scalar so that the leading coefficient becomes 1. 
-            if augmented[current_row, current_col] != 1:
+            if augmented[current_row, current_col] != 1 and augmented[current_row, current_col] != 0:
                 augmented[current_row, :] = augmented[current_row, :] / augmented[current_row, current_col]
 
 
