@@ -1,7 +1,7 @@
 /* 
  * CS:APP Data Lab 
  * 
- * <Please put your name and userid here>
+ * Stephen Beckstrand -> A02311346
  * 
  * bits.c - Source file with your solutions to the Lab.
  *          This is the file you will hand in to your instructor.
@@ -178,8 +178,18 @@ NOTES:
  *   Rating: 1
  */
 int bitAnd(int x, int y) {
-  return 2;
+  /* 
+  This solution inverts both binary sets and checks which are 
+  not equal, and then returns the inverse of these results. 
+  
+  This works because using | (or) on the two inverted variables returns true 
+  for cases where both equal 0, or where only one of the two values equals 1.
+  These are the exact cases that return 0 when using & (and). 
+  */
+
+  return ~(~x | ~y);
 }
+
 /* 
  * bitXor - x^y using only ~ and & 
  *   Example: bitXor(4, 5) = 1
@@ -188,7 +198,13 @@ int bitAnd(int x, int y) {
  *   Rating: 1
  */
 int bitXor(int x, int y) {
-  return 2;
+  /*
+    This solution checks for comparative bits that are both != 1 ~(x & y).
+    Then it checks for comparative bits that are both equal to 0 and returns its inverse ~(~x & ~y).
+    Lastly, it returns where both of these values are equal to 1 as these represent the bits 
+    that have different values in the two variables.
+  */
+  return ~(x & y) & ~(~x & ~y);
 }
 /* 
  * tmin - return minimum two's complement integer 
@@ -197,7 +213,11 @@ int bitXor(int x, int y) {
  *   Rating: 1
  */
 int tmin(void) {
-  return 2;
+  /*
+    This solution works by shifting 1 to the 32nd bit place which in the two's compliement 
+    the minimum value. 
+  */
+  return 1<<31;
 }
 /* 
  * bitOr - x|y using only ~ and & 
@@ -207,7 +227,7 @@ int tmin(void) {
  *   Rating: 1
  */
 int bitOr(int x, int y) {
-  return 2;
+  return ~(~x & ~y);
 }
 /* 
  * bitNor - ~(x|y) using only ~ and & 
@@ -217,7 +237,7 @@ int bitOr(int x, int y) {
  *   Rating: 1
  */
 int bitNor(int x, int y) {
-  return 2;
+  return (~x & ~y);
 }
 //2
 /* 
@@ -230,7 +250,28 @@ int bitNor(int x, int y) {
  *  Rating: 2
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+    /* 
+    This solution works by first finding what value is at byte n 
+    and m (by finding x shifted at n * 7 and m * 8.
+
+    Then it shifts the value at n and m in x. 
+    
+    */
+
+    int y;
+    int r;
+  
+    int pos_n = (x >> (n << 3) & 0xFF);
+    int pos_m = (x >> (m << 3) & 0xFF);
+
+    pos_n = pos_n << (m << 3);
+    pos_m = pos_m << (n << 3);
+    y = (0xFF << (n << 3) | (0xFF << (m << 3)));
+    y = ~y & x;
+
+    r = y | pos_m | pos_n;
+
+    return r;
 }
 /* 
  * allOddBits - return 1 if all odd-numbered bits in word set to 1
@@ -241,7 +282,10 @@ int byteSwap(int x, int n, int m) {
  *   Rating: 2
  */
 int allOddBits(int x) {
-  return 2;
+  int y = (0xAA << 24) + (0xAA << 16) + (0xAA << 8) + 0xAA;
+  x = (x & y);
+  x = (x ^ y);
+  return !x;
 }
 /* 
  * negate - return -x 
@@ -251,7 +295,7 @@ int allOddBits(int x) {
  *   Rating: 2
  */
 int negate(int x) {
-  return 2;
+  return ~x + 1;
 }
 //3
 /* 
@@ -264,7 +308,13 @@ int negate(int x) {
  *   Rating: 3
  */
 int isAsciiDigit(int x) {
-  return 2;
+  int low = 0x30;
+  int high = 0x39;
+
+  int highDiff = high + (~x + 1);
+  int lowDiff = x + (~low + 1);
+
+  return !(lowDiff >> 31) & !(highDiff >> 31);
 }
 /* 
  * conditional - same as x ? y : z 
@@ -274,7 +324,10 @@ int isAsciiDigit(int x) {
  *   Rating: 3
  */
 int conditional(int x, int y, int z) {
-  return 2;
+  int result = ~(!x + ~0x0);
+
+  return (result & z) | (~result & y);
+
 }
 /* 
  * isLessOrEqual - if x <= y  then return 1, else return 0 
@@ -284,7 +337,19 @@ int conditional(int x, int y, int z) {
  *   Rating: 3
  */
 int isLessOrEqual(int x, int y) {
-  return 2;
+  /*
+    First, I checked if x and y have different signs. If x is negative, but y is not, return 1. 
+    Second, I checke the difference between y and x by adding the negative version of x to y. If 
+  */
+  int xpos = !(x >> 31);
+  int ypos = !(y >> 31);
+  int different_signs = xpos ^ ypos;
+
+  int only_x_neg = !xpos & different_signs;
+
+  int diff = (y+(~x+1)>>31);
+
+  return only_x_neg | (!different_signs & !diff);
 }
 //4
 /* 
@@ -296,7 +361,21 @@ int isLessOrEqual(int x, int y) {
  *   Rating: 4 
  */
 int greatestBitPos(int x) {
-  return 2;
+  /*
+  This function checks where the largest bit is used by splitting the total 
+  number of bits (32) in half moving from 1 -> 16. 
+  
+  We then set y to the value of the highest bit possible under the quadrant we found to have the largest bit. 
+  */
+  int y = x;
+  
+  y = (y >> 1) | y;
+  y = (y >> 2) | y;
+  y = (y >> 4) | y;
+  y = (y >> 8) | y;
+  y = (y >> 16) | y;
+  y = y & ((1 << 31 ) ^ (~y >> 1));
+  return y;
 }
 /* howManyBits - return the minimum number of bits required to represent x in
  *             two's complement
@@ -311,8 +390,18 @@ int greatestBitPos(int x) {
  *  Rating: 4
  */
 int howManyBits(int x) {
-  return 0;
+  int bitCount = 0;
+  int y = x;
+  
+  bitCount = bitCount + !!(y >> 16);
+  bitCount = bitCount + !!(y >> 8) + 1;
+  bitCount = bitCount + !!(y >> 4) + 1;
+  bitCount = bitCount + !!(y >> 2) + 1;
+  bitCount = bitCount + !!(y >> 1) + 1;
+  
+  return y;
 }
+
 /* 
  * bang - Compute !x without using !
  *   Examples: bang(3) = 0, bang(0) = 1
@@ -321,5 +410,12 @@ int howManyBits(int x) {
  *   Rating: 4 
  */
 int bang(int x) {
-  return 2;
+  /*
+    If x isnt 0, set it to 0xffffffff . Return x + 1. If initial value is 0, it returns 0 + 1. 
+    If it wasnt zero, adding 1 to 0xffffffff will roll it over into 0x0 which is 0. 
+  */
+  x = (~x + 1) | x;
+  x = (x >> 31) + 1;
+
+  return x;
 }
