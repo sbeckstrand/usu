@@ -1,0 +1,7 @@
+/* 
+Most styling is being done via Bootstrap. Custom CSS here is for 
+changing the styling of the scroll bar for webkit supporting browsers.
+i.e., Most browsers besides Firefox and IE */
+.container-canvas {
+    text-align: center;
+}

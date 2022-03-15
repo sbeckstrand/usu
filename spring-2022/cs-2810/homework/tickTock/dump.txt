@@ -1,0 +1,942 @@
+
+tickTock:	file format elf32-i386
+
+
+Disassembly of section .init:
+
+00001000 <_init>:
+    1000: f3 0f 1e fb                  	endbr32
+    1004: 53                           	pushl	%ebx
+    1005: 83 ec 08                     	subl	$8, %esp
+    1008: e8 a3 02 00 00               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    100d: 81 c3 83 2f 00 00            	addl	$12163, %ebx
+    1013: 8b 83 64 00 00 00            	movl	100(%ebx), %eax
+    1019: 85 c0                        	testl	%eax, %eax
+    101b: 74 02                        	je	0x101f <_init+0x1f>
+    101d: ff d0                        	calll	*%eax
+    101f: 83 c4 08                     	addl	$8, %esp
+    1022: 5b                           	popl	%ebx
+    1023: c3                           	retl
+
+Disassembly of section .plt:
+
+00001030 <.plt>:
+    1030: ff b3 04 00 00 00            	pushl	4(%ebx)
+    1036: ff a3 08 00 00 00            	jmpl	*8(%ebx)
+    103c: 0f 1f 40 00                  	nopl	(%eax)
+    1040: f3 0f 1e fb                  	endbr32
+    1044: 68 00 00 00 00               	pushl	$0
+    1049: e9 e2 ff ff ff               	jmp	0x1030 <.plt>
+    104e: 66 90                        	nop
+    1050: f3 0f 1e fb                  	endbr32
+    1054: 68 08 00 00 00               	pushl	$8
+    1059: e9 d2 ff ff ff               	jmp	0x1030 <.plt>
+    105e: 66 90                        	nop
+    1060: f3 0f 1e fb                  	endbr32
+    1064: 68 10 00 00 00               	pushl	$16
+    1069: e9 c2 ff ff ff               	jmp	0x1030 <.plt>
+    106e: 66 90                        	nop
+    1070: f3 0f 1e fb                  	endbr32
+    1074: 68 18 00 00 00               	pushl	$24
+    1079: e9 b2 ff ff ff               	jmp	0x1030 <.plt>
+    107e: 66 90                        	nop
+    1080: f3 0f 1e fb                  	endbr32
+    1084: 68 20 00 00 00               	pushl	$32
+    1089: e9 a2 ff ff ff               	jmp	0x1030 <.plt>
+    108e: 66 90                        	nop
+    1090: f3 0f 1e fb                  	endbr32
+    1094: 68 28 00 00 00               	pushl	$40
+    1099: e9 92 ff ff ff               	jmp	0x1030 <.plt>
+    109e: 66 90                        	nop
+    10a0: f3 0f 1e fb                  	endbr32
+    10a4: 68 30 00 00 00               	pushl	$48
+    10a9: e9 82 ff ff ff               	jmp	0x1030 <.plt>
+    10ae: 66 90                        	nop
+    10b0: f3 0f 1e fb                  	endbr32
+    10b4: 68 38 00 00 00               	pushl	$56
+    10b9: e9 72 ff ff ff               	jmp	0x1030 <.plt>
+    10be: 66 90                        	nop
+    10c0: f3 0f 1e fb                  	endbr32
+    10c4: 68 40 00 00 00               	pushl	$64
+    10c9: e9 62 ff ff ff               	jmp	0x1030 <.plt>
+    10ce: 66 90                        	nop
+    10d0: f3 0f 1e fb                  	endbr32
+    10d4: 68 48 00 00 00               	pushl	$72
+    10d9: e9 52 ff ff ff               	jmp	0x1030 <.plt>
+    10de: 66 90                        	nop
+    10e0: f3 0f 1e fb                  	endbr32
+    10e4: 68 50 00 00 00               	pushl	$80
+    10e9: e9 42 ff ff ff               	jmp	0x1030 <.plt>
+    10ee: 66 90                        	nop
+    10f0: f3 0f 1e fb                  	endbr32
+    10f4: 68 58 00 00 00               	pushl	$88
+    10f9: e9 32 ff ff ff               	jmp	0x1030 <.plt>
+    10fe: 66 90                        	nop
+    1100: f3 0f 1e fb                  	endbr32
+    1104: 68 60 00 00 00               	pushl	$96
+    1109: e9 22 ff ff ff               	jmp	0x1030 <.plt>
+    110e: 66 90                        	nop
+    1110: f3 0f 1e fb                  	endbr32
+    1114: 68 68 00 00 00               	pushl	$104
+    1119: e9 12 ff ff ff               	jmp	0x1030 <.plt>
+    111e: 66 90                        	nop
+    1120: f3 0f 1e fb                  	endbr32
+    1124: 68 70 00 00 00               	pushl	$112
+    1129: e9 02 ff ff ff               	jmp	0x1030 <.plt>
+    112e: 66 90                        	nop
+    1130: f3 0f 1e fb                  	endbr32
+    1134: 68 78 00 00 00               	pushl	$120
+    1139: e9 f2 fe ff ff               	jmp	0x1030 <.plt>
+    113e: 66 90                        	nop
+    1140: f3 0f 1e fb                  	endbr32
+    1144: 68 80 00 00 00               	pushl	$128
+    1149: e9 e2 fe ff ff               	jmp	0x1030 <.plt>
+    114e: 66 90                        	nop
+
+Disassembly of section .plt.got:
+
+00001150 <.plt.got>:
+    1150: f3 0f 1e fb                  	endbr32
+    1154: ff a3 50 00 00 00            	jmpl	*80(%ebx)
+    115a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+
+Disassembly of section .plt.sec:
+
+00001160 <.plt.sec>:
+    1160: f3 0f 1e fb                  	endbr32
+    1164: ff a3 0c 00 00 00            	jmpl	*12(%ebx)
+    116a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1170: f3 0f 1e fb                  	endbr32
+    1174: ff a3 10 00 00 00            	jmpl	*16(%ebx)
+    117a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1180: f3 0f 1e fb                  	endbr32
+    1184: ff a3 14 00 00 00            	jmpl	*20(%ebx)
+    118a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1190: f3 0f 1e fb                  	endbr32
+    1194: ff a3 18 00 00 00            	jmpl	*24(%ebx)
+    119a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11a0: f3 0f 1e fb                  	endbr32
+    11a4: ff a3 1c 00 00 00            	jmpl	*28(%ebx)
+    11aa: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11b0: f3 0f 1e fb                  	endbr32
+    11b4: ff a3 20 00 00 00            	jmpl	*32(%ebx)
+    11ba: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11c0: f3 0f 1e fb                  	endbr32
+    11c4: ff a3 24 00 00 00            	jmpl	*36(%ebx)
+    11ca: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11d0: f3 0f 1e fb                  	endbr32
+    11d4: ff a3 28 00 00 00            	jmpl	*40(%ebx)
+    11da: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11e0: f3 0f 1e fb                  	endbr32
+    11e4: ff a3 2c 00 00 00            	jmpl	*44(%ebx)
+    11ea: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    11f0: f3 0f 1e fb                  	endbr32
+    11f4: ff a3 30 00 00 00            	jmpl	*48(%ebx)
+    11fa: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1200: f3 0f 1e fb                  	endbr32
+    1204: ff a3 34 00 00 00            	jmpl	*52(%ebx)
+    120a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1210: f3 0f 1e fb                  	endbr32
+    1214: ff a3 38 00 00 00            	jmpl	*56(%ebx)
+    121a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1220: f3 0f 1e fb                  	endbr32
+    1224: ff a3 3c 00 00 00            	jmpl	*60(%ebx)
+    122a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1230: f3 0f 1e fb                  	endbr32
+    1234: ff a3 40 00 00 00            	jmpl	*64(%ebx)
+    123a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1240: f3 0f 1e fb                  	endbr32
+    1244: ff a3 44 00 00 00            	jmpl	*68(%ebx)
+    124a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1250: f3 0f 1e fb                  	endbr32
+    1254: ff a3 48 00 00 00            	jmpl	*72(%ebx)
+    125a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+    1260: f3 0f 1e fb                  	endbr32
+    1264: ff a3 4c 00 00 00            	jmpl	*76(%ebx)
+    126a: 66 0f 1f 44 00 00            	nopw	(%eax,%eax)
+
+Disassembly of section .text:
+
+00001270 <_start>:
+    1270: f3 0f 1e fb                  	endbr32
+    1274: 31 ed                        	xorl	%ebp, %ebp
+    1276: 5e                           	popl	%esi
+    1277: 89 e1                        	movl	%esp, %ecx
+    1279: 83 e4 f0                     	andl	$-16, %esp
+    127c: 50                           	pushl	%eax
+    127d: 54                           	pushl	%esp
+    127e: 52                           	pushl	%edx
+    127f: e8 22 00 00 00               	calll	0x12a6 <_start+0x36>
+    1284: 81 c3 0c 2d 00 00            	addl	$11532, %ebx
+    128a: 8d 83 50 db ff ff            	leal	-9392(%ebx), %eax
+    1290: 50                           	pushl	%eax
+    1291: 8d 83 e0 da ff ff            	leal	-9504(%ebx), %eax
+    1297: 50                           	pushl	%eax
+    1298: 51                           	pushl	%ecx
+    1299: 56                           	pushl	%esi
+    129a: ff b3 54 00 00 00            	pushl	84(%ebx)
+    12a0: e8 0b ff ff ff               	calll	0x11b0 <.plt.sec+0x50>
+    12a5: f4                           	hlt
+    12a6: 8b 1c 24                     	movl	(%esp), %ebx
+    12a9: c3                           	retl
+    12aa: 66 90                        	nop
+    12ac: 66 90                        	nop
+    12ae: 66 90                        	nop
+
+000012b0 <__x86.get_pc_thunk.bx>:
+    12b0: 8b 1c 24                     	movl	(%esp), %ebx
+    12b3: c3                           	retl
+    12b4: 66 90                        	nop
+    12b6: 66 90                        	nop
+    12b8: 66 90                        	nop
+    12ba: 66 90                        	nop
+    12bc: 66 90                        	nop
+    12be: 66 90                        	nop
+
+000012c0 <deregister_tm_clones>:
+    12c0: e8 e4 00 00 00               	calll	0x13a9 <__x86.get_pc_thunk.dx>
+    12c5: 81 c2 cb 2c 00 00            	addl	$11467, %edx
+    12cb: 8d 8a 7c 00 00 00            	leal	124(%edx), %ecx
+    12d1: 8d 82 7c 00 00 00            	leal	124(%edx), %eax
+    12d7: 39 c8                        	cmpl	%ecx, %eax
+    12d9: 74 1d                        	je	0x12f8 <deregister_tm_clones+0x38>
+    12db: 8b 82 60 00 00 00            	movl	96(%edx), %eax
+    12e1: 85 c0                        	testl	%eax, %eax
+    12e3: 74 13                        	je	0x12f8 <deregister_tm_clones+0x38>
+    12e5: 55                           	pushl	%ebp
+    12e6: 89 e5                        	movl	%esp, %ebp
+    12e8: 83 ec 14                     	subl	$20, %esp
+    12eb: 51                           	pushl	%ecx
+    12ec: ff d0                        	calll	*%eax
+    12ee: 83 c4 10                     	addl	$16, %esp
+    12f1: c9                           	leave
+    12f2: c3                           	retl
+    12f3: 8d 74 26 00                  	leal	(%esi,%eiz), %esi
+    12f7: 90                           	nop
+    12f8: c3                           	retl
+    12f9: 8d b4 26 00 00 00 00         	leal	(%esi,%eiz), %esi
+
+00001300 <register_tm_clones>:
+    1300: e8 a4 00 00 00               	calll	0x13a9 <__x86.get_pc_thunk.dx>
+    1305: 81 c2 8b 2c 00 00            	addl	$11403, %edx
+    130b: 55                           	pushl	%ebp
+    130c: 89 e5                        	movl	%esp, %ebp
+    130e: 53                           	pushl	%ebx
+    130f: 8d 8a 7c 00 00 00            	leal	124(%edx), %ecx
+    1315: 8d 82 7c 00 00 00            	leal	124(%edx), %eax
+    131b: 83 ec 04                     	subl	$4, %esp
+    131e: 29 c8                        	subl	%ecx, %eax
+    1320: 89 c3                        	movl	%eax, %ebx
+    1322: c1 e8 1f                     	shrl	$31, %eax
+    1325: c1 fb 02                     	sarl	$2, %ebx
+    1328: 01 d8                        	addl	%ebx, %eax
+    132a: d1 f8                        	sarl	%eax
+    132c: 74 14                        	je	0x1342 <register_tm_clones+0x42>
+    132e: 8b 92 68 00 00 00            	movl	104(%edx), %edx
+    1334: 85 d2                        	testl	%edx, %edx
+    1336: 74 0a                        	je	0x1342 <register_tm_clones+0x42>
+    1338: 83 ec 08                     	subl	$8, %esp
+    133b: 50                           	pushl	%eax
+    133c: 51                           	pushl	%ecx
+    133d: ff d2                        	calll	*%edx
+    133f: 83 c4 10                     	addl	$16, %esp
+    1342: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    1345: c9                           	leave
+    1346: c3                           	retl
+    1347: 8d b4 26 00 00 00 00         	leal	(%esi,%eiz), %esi
+    134e: 66 90                        	nop
+
+00001350 <__do_global_dtors_aux>:
+    1350: f3 0f 1e fb                  	endbr32
+    1354: 55                           	pushl	%ebp
+    1355: 89 e5                        	movl	%esp, %ebp
+    1357: 53                           	pushl	%ebx
+    1358: e8 53 ff ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    135d: 81 c3 33 2c 00 00            	addl	$11315, %ebx
+    1363: 83 ec 04                     	subl	$4, %esp
+    1366: 80 bb 7c 00 00 00 00         	cmpb	$0, 124(%ebx)
+    136d: 75 27                        	jne	0x1396 <__do_global_dtors_aux+0x46>
+    136f: 8b 83 50 00 00 00            	movl	80(%ebx), %eax
+    1375: 85 c0                        	testl	%eax, %eax
+    1377: 74 11                        	je	0x138a <__do_global_dtors_aux+0x3a>
+    1379: 83 ec 0c                     	subl	$12, %esp
+    137c: ff b3 74 00 00 00            	pushl	116(%ebx)
+    1382: e8 c9 fd ff ff               	calll	0x1150 <.plt.got>
+    1387: 83 c4 10                     	addl	$16, %esp
+    138a: e8 31 ff ff ff               	calll	0x12c0 <deregister_tm_clones>
+    138f: c6 83 7c 00 00 00 01         	movb	$1, 124(%ebx)
+    1396: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    1399: c9                           	leave
+    139a: c3                           	retl
+    139b: 8d 74 26 00                  	leal	(%esi,%eiz), %esi
+    139f: 90                           	nop
+
+000013a0 <frame_dummy>:
+    13a0: f3 0f 1e fb                  	endbr32
+    13a4: e9 57 ff ff ff               	jmp	0x1300 <register_tm_clones>
+
+000013a9 <__x86.get_pc_thunk.dx>:
+    13a9: 8b 14 24                     	movl	(%esp), %edx
+    13ac: c3                           	retl
+
+000013ad <checkStageOne(int, int)>:
+    13ad: f3 0f 1e fb                  	endbr32
+    13b1: 55                           	pushl	%ebp
+    13b2: 89 e5                        	movl	%esp, %ebp
+    13b4: 53                           	pushl	%ebx
+    13b5: 83 ec 14                     	subl	$20, %esp
+    13b8: e8 f3 fe ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    13bd: 81 c3 d3 2b 00 00            	addl	$11219, %ebx
+    13c3: c6 45 f7 00                  	movb	$0, -9(%ebp)
+    13c7: 83 7d 0c 02                  	cmpl	$2, 12(%ebp)
+    13cb: 7e 3d                        	jle	0x140a <checkStageOne(int, int)+0x5d>
+    13cd: 8b 45 08                     	movl	8(%ebp), %eax
+    13d0: 99                           	cltd
+    13d1: f7 7d 0c                     	idivl	12(%ebp)
+    13d4: 89 d0                        	movl	%edx, %eax
+    13d6: 85 c0                        	testl	%eax, %eax
+    13d8: 75 30                        	jne	0x140a <checkStageOne(int, int)+0x5d>
+    13da: 83 ec 08                     	subl	$8, %esp
+    13dd: 8d 83 79 e0 ff ff            	leal	-8071(%ebx), %eax
+    13e3: 50                           	pushl	%eax
+    13e4: 8b 83 5c 00 00 00            	movl	92(%ebx), %eax
+    13ea: 50                           	pushl	%eax
+    13eb: e8 d0 fd ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    13f0: 83 c4 10                     	addl	$16, %esp
+    13f3: 83 ec 08                     	subl	$8, %esp
+    13f6: 8b 93 58 00 00 00            	movl	88(%ebx), %edx
+    13fc: 52                           	pushl	%edx
+    13fd: 50                           	pushl	%eax
+    13fe: e8 cd fd ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    1403: 83 c4 10                     	addl	$16, %esp
+    1406: c6 45 f7 01                  	movb	$1, -9(%ebp)
+    140a: 0f b6 45 f7                  	movzbl	-9(%ebp), %eax
+    140e: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    1411: c9                           	leave
+    1412: c3                           	retl
+
+00001413 <checkStageTwo(int, int)>:
+    1413: f3 0f 1e fb                  	endbr32
+    1417: 55                           	pushl	%ebp
+    1418: 89 e5                        	movl	%esp, %ebp
+    141a: 53                           	pushl	%ebx
+    141b: 83 ec 14                     	subl	$20, %esp
+    141e: e8 8d fe ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    1423: 81 c3 6d 2b 00 00            	addl	$11117, %ebx
+    1429: c6 45 f7 00                  	movb	$0, -9(%ebp)
+    142d: 8b 45 08                     	movl	8(%ebp), %eax
+    1430: 83 e8 01                     	subl	$1, %eax
+    1433: 39 45 0c                     	cmpl	%eax, 12(%ebp)
+    1436: 7c 3b                        	jl	0x1473 <checkStageTwo(int, int)+0x60>
+    1438: 8b 45 08                     	movl	8(%ebp), %eax
+    143b: 83 c0 01                     	addl	$1, %eax
+    143e: 39 45 0c                     	cmpl	%eax, 12(%ebp)
+    1441: 7f 30                        	jg	0x1473 <checkStageTwo(int, int)+0x60>
+    1443: 83 ec 08                     	subl	$8, %esp
+    1446: 8d 83 8a e0 ff ff            	leal	-8054(%ebx), %eax
+    144c: 50                           	pushl	%eax
+    144d: 8b 83 5c 00 00 00            	movl	92(%ebx), %eax
+    1453: 50                           	pushl	%eax
+    1454: e8 67 fd ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    1459: 83 c4 10                     	addl	$16, %esp
+    145c: 83 ec 08                     	subl	$8, %esp
+    145f: 8b 93 58 00 00 00            	movl	88(%ebx), %edx
+    1465: 52                           	pushl	%edx
+    1466: 50                           	pushl	%eax
+    1467: e8 64 fd ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    146c: 83 c4 10                     	addl	$16, %esp
+    146f: c6 45 f7 01                  	movb	$1, -9(%ebp)
+    1473: 0f b6 45 f7                  	movzbl	-9(%ebp), %eax
+    1477: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    147a: c9                           	leave
+    147b: c3                           	retl
+
+0000147c <checkStageThree(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)>:
+    147c: f3 0f 1e fb                  	endbr32
+    1480: 55                           	pushl	%ebp
+    1481: 89 e5                        	movl	%esp, %ebp
+    1483: 53                           	pushl	%ebx
+    1484: 83 ec 14                     	subl	$20, %esp
+    1487: e8 24 fe ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    148c: 81 c3 04 2b 00 00            	addl	$11012, %ebx
+    1492: c6 45 f7 00                  	movb	$0, -9(%ebp)
+    1496: 83 ec 08                     	subl	$8, %esp
+    1499: 8d 83 9b e0 ff ff            	leal	-8037(%ebx), %eax
+    149f: 50                           	pushl	%eax
+    14a0: ff 75 08                     	pushl	8(%ebp)
+    14a3: e8 85 05 00 00               	calll	0x1a2d <bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)>
+    14a8: 83 c4 10                     	addl	$16, %esp
+    14ab: 84 c0                        	testb	%al, %al
+    14ad: 74 30                        	je	0x14df <checkStageThree(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)+0x63>
+    14af: c6 45 f7 01                  	movb	$1, -9(%ebp)
+    14b3: 83 ec 08                     	subl	$8, %esp
+    14b6: 8d 83 b1 e0 ff ff            	leal	-8015(%ebx), %eax
+    14bc: 50                           	pushl	%eax
+    14bd: 8b 83 5c 00 00 00            	movl	92(%ebx), %eax
+    14c3: 50                           	pushl	%eax
+    14c4: e8 f7 fc ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    14c9: 83 c4 10                     	addl	$16, %esp
+    14cc: 83 ec 08                     	subl	$8, %esp
+    14cf: 8b 93 58 00 00 00            	movl	88(%ebx), %edx
+    14d5: 52                           	pushl	%edx
+    14d6: 50                           	pushl	%eax
+    14d7: e8 f4 fc ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    14dc: 83 c4 10                     	addl	$16, %esp
+    14df: 0f b6 45 f7                  	movzbl	-9(%ebp), %eax
+    14e3: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    14e6: c9                           	leave
+    14e7: c3                           	retl
+
+000014e8 <main>:
+    14e8: f3 0f 1e fb                  	endbr32
+    14ec: 8d 4c 24 04                  	leal	4(%esp), %ecx
+    14f0: 83 e4 f0                     	andl	$-16, %esp
+    14f3: ff 71 fc                     	pushl	-4(%ecx)
+    14f6: 55                           	pushl	%ebp
+    14f7: 89 e5                        	movl	%esp, %ebp
+    14f9: 57                           	pushl	%edi
+    14fa: 56                           	pushl	%esi
+    14fb: 53                           	pushl	%ebx
+    14fc: 51                           	pushl	%ecx
+    14fd: 83 ec 68                     	subl	$104, %esp
+    1500: e8 5e 05 00 00               	calll	0x1a63 <__x86.get_pc_thunk.si>
+    1505: 81 c6 8b 2a 00 00            	addl	$10891, %esi
+    150b: 89 c8                        	movl	%ecx, %eax
+    150d: 8b 50 04                     	movl	4(%eax), %edx
+    1510: 89 55 94                     	movl	%edx, -108(%ebp)
+    1513: 65 8b 0d 14 00 00 00         	movl	%gs:20, %ecx
+    151a: 89 4d e4                     	movl	%ecx, -28(%ebp)
+    151d: 31 c9                        	xorl	%ecx, %ecx
+    151f: 83 38 03                     	cmpl	$3, (%eax)
+    1522: 7f 35                        	jg	0x1559 <main+0x71>
+    1524: 83 ec 08                     	subl	$8, %esp
+    1527: 8d 86 c4 e0 ff ff            	leal	-7996(%esi), %eax
+    152d: 50                           	pushl	%eax
+    152e: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    1534: 50                           	pushl	%eax
+    1535: 89 f3                        	movl	%esi, %ebx
+    1537: e8 84 fc ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    153c: 83 c4 10                     	addl	$16, %esp
+    153f: 83 ec 08                     	subl	$8, %esp
+    1542: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    1548: 52                           	pushl	%edx
+    1549: 50                           	pushl	%eax
+    154a: 89 f3                        	movl	%esi, %ebx
+    154c: e8 7f fc ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    1551: 83 c4 10                     	addl	$16, %esp
+    1554: e9 ad 03 00 00               	jmp	0x1906 <main+0x41e>
+    1559: c7 45 a8 00 00 00 00         	movl	$0, -88(%ebp)
+    1560: c7 45 ac 00 00 00 00         	movl	$0, -84(%ebp)
+    1567: c7 45 b0 00 00 00 00         	movl	$0, -80(%ebp)
+    156e: 83 ec 0c                     	subl	$12, %esp
+    1571: 8d 45 a2                     	leal	-94(%ebp), %eax
+    1574: 50                           	pushl	%eax
+    1575: 89 f3                        	movl	%esi, %ebx
+    1577: e8 e4 fc ff ff               	calll	0x1260 <.plt.sec+0x100>
+    157c: 83 c4 10                     	addl	$16, %esp
+    157f: 83 ec 04                     	subl	$4, %esp
+    1582: 8d 45 a2                     	leal	-94(%ebp), %eax
+    1585: 50                           	pushl	%eax
+    1586: 8d 86 fa e0 ff ff            	leal	-7942(%esi), %eax
+    158c: 50                           	pushl	%eax
+    158d: 8d 45 b4                     	leal	-76(%ebp), %eax
+    1590: 50                           	pushl	%eax
+    1591: 89 f3                        	movl	%esi, %ebx
+    1593: e8 78 fc ff ff               	calll	0x1210 <.plt.sec+0xb0>
+    1598: 83 c4 10                     	addl	$16, %esp
+    159b: 83 ec 0c                     	subl	$12, %esp
+    159e: 8d 45 a2                     	leal	-94(%ebp), %eax
+    15a1: 50                           	pushl	%eax
+    15a2: 89 f3                        	movl	%esi, %ebx
+    15a4: e8 37 fc ff ff               	calll	0x11e0 <.plt.sec+0x80>
+    15a9: 83 c4 10                     	addl	$16, %esp
+    15ac: c6 45 a3 00                  	movb	$0, -93(%ebp)
+    15b0: c7 45 a4 00 00 00 00         	movl	$0, -92(%ebp)
+    15b7: 8b 45 94                     	movl	-108(%ebp), %eax
+    15ba: 83 c0 04                     	addl	$4, %eax
+    15bd: 8b 00                        	movl	(%eax), %eax
+    15bf: 83 ec 0c                     	subl	$12, %esp
+    15c2: 50                           	pushl	%eax
+    15c3: 89 f3                        	movl	%esi, %ebx
+    15c5: e8 66 fc ff ff               	calll	0x1230 <.plt.sec+0xd0>
+    15ca: 83 c4 10                     	addl	$16, %esp
+    15cd: 89 45 a8                     	movl	%eax, -88(%ebp)
+    15d0: 8b 45 94                     	movl	-108(%ebp), %eax
+    15d3: 83 c0 08                     	addl	$8, %eax
+    15d6: 8b 00                        	movl	(%eax), %eax
+    15d8: 83 ec 0c                     	subl	$12, %esp
+    15db: 50                           	pushl	%eax
+    15dc: 89 f3                        	movl	%esi, %ebx
+    15de: e8 4d fc ff ff               	calll	0x1230 <.plt.sec+0xd0>
+    15e3: 83 c4 10                     	addl	$16, %esp
+    15e6: 89 45 ac                     	movl	%eax, -84(%ebp)
+    15e9: 8b 45 94                     	movl	-108(%ebp), %eax
+    15ec: 83 c0 0c                     	addl	$12, %eax
+    15ef: 8b 00                        	movl	(%eax), %eax
+    15f1: 83 ec 0c                     	subl	$12, %esp
+    15f4: 50                           	pushl	%eax
+    15f5: 89 f3                        	movl	%esi, %ebx
+    15f7: e8 34 fc ff ff               	calll	0x1230 <.plt.sec+0xd0>
+    15fc: 83 c4 10                     	addl	$16, %esp
+    15ff: 89 45 b0                     	movl	%eax, -80(%ebp)
+    1602: 83 ec 0c                     	subl	$12, %esp
+    1605: 8d 45 a2                     	leal	-94(%ebp), %eax
+    1608: 50                           	pushl	%eax
+    1609: 89 f3                        	movl	%esi, %ebx
+    160b: e8 50 fc ff ff               	calll	0x1260 <.plt.sec+0x100>
+    1610: 83 c4 10                     	addl	$16, %esp
+    1613: 8b 45 94                     	movl	-108(%ebp), %eax
+    1616: 83 c0 10                     	addl	$16, %eax
+    1619: 8b 00                        	movl	(%eax), %eax
+    161b: 83 ec 04                     	subl	$4, %esp
+    161e: 8d 55 a2                     	leal	-94(%ebp), %edx
+    1621: 52                           	pushl	%edx
+    1622: 50                           	pushl	%eax
+    1623: 8d 45 cc                     	leal	-52(%ebp), %eax
+    1626: 50                           	pushl	%eax
+    1627: 89 f3                        	movl	%esi, %ebx
+    1629: e8 e2 fb ff ff               	calll	0x1210 <.plt.sec+0xb0>
+    162e: 83 c4 10                     	addl	$16, %esp
+    1631: 83 ec 08                     	subl	$8, %esp
+    1634: 8d 45 cc                     	leal	-52(%ebp), %eax
+    1637: 50                           	pushl	%eax
+    1638: 8d 45 b4                     	leal	-76(%ebp), %eax
+    163b: 50                           	pushl	%eax
+    163c: 89 f3                        	movl	%esi, %ebx
+    163e: e8 bd fb ff ff               	calll	0x1200 <.plt.sec+0xa0>
+    1643: 83 c4 10                     	addl	$16, %esp
+    1646: 83 ec 0c                     	subl	$12, %esp
+    1649: 8d 45 cc                     	leal	-52(%ebp), %eax
+    164c: 50                           	pushl	%eax
+    164d: 89 f3                        	movl	%esi, %ebx
+    164f: e8 2c fb ff ff               	calll	0x1180 <.plt.sec+0x20>
+    1654: 83 c4 10                     	addl	$16, %esp
+    1657: 83 ec 0c                     	subl	$12, %esp
+    165a: 8d 45 a2                     	leal	-94(%ebp), %eax
+    165d: 50                           	pushl	%eax
+    165e: 89 f3                        	movl	%esi, %ebx
+    1660: e8 7b fb ff ff               	calll	0x11e0 <.plt.sec+0x80>
+    1665: 83 c4 10                     	addl	$16, %esp
+    1668: 83 ec 08                     	subl	$8, %esp
+    166b: 8d 86 fb e0 ff ff            	leal	-7941(%esi), %eax
+    1671: 50                           	pushl	%eax
+    1672: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    1678: 50                           	pushl	%eax
+    1679: 89 f3                        	movl	%esi, %ebx
+    167b: e8 40 fb ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    1680: 83 c4 10                     	addl	$16, %esp
+    1683: 83 ec 08                     	subl	$8, %esp
+    1686: ff 75 a8                     	pushl	-88(%ebp)
+    1689: 50                           	pushl	%eax
+    168a: 89 f3                        	movl	%esi, %ebx
+    168c: e8 af fb ff ff               	calll	0x1240 <.plt.sec+0xe0>
+    1691: 83 c4 10                     	addl	$16, %esp
+    1694: 83 ec 08                     	subl	$8, %esp
+    1697: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    169d: 52                           	pushl	%edx
+    169e: 50                           	pushl	%eax
+    169f: 89 f3                        	movl	%esi, %ebx
+    16a1: e8 2a fb ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    16a6: 83 c4 10                     	addl	$16, %esp
+    16a9: 83 ec 08                     	subl	$8, %esp
+    16ac: 8d 86 04 e1 ff ff            	leal	-7932(%esi), %eax
+    16b2: 50                           	pushl	%eax
+    16b3: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    16b9: 50                           	pushl	%eax
+    16ba: 89 f3                        	movl	%esi, %ebx
+    16bc: e8 ff fa ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    16c1: 83 c4 10                     	addl	$16, %esp
+    16c4: 83 ec 08                     	subl	$8, %esp
+    16c7: ff 75 ac                     	pushl	-84(%ebp)
+    16ca: 50                           	pushl	%eax
+    16cb: 89 f3                        	movl	%esi, %ebx
+    16cd: e8 6e fb ff ff               	calll	0x1240 <.plt.sec+0xe0>
+    16d2: 83 c4 10                     	addl	$16, %esp
+    16d5: 83 ec 08                     	subl	$8, %esp
+    16d8: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    16de: 52                           	pushl	%edx
+    16df: 50                           	pushl	%eax
+    16e0: 89 f3                        	movl	%esi, %ebx
+    16e2: e8 e9 fa ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    16e7: 83 c4 10                     	addl	$16, %esp
+    16ea: 83 ec 08                     	subl	$8, %esp
+    16ed: 8d 86 14 e1 ff ff            	leal	-7916(%esi), %eax
+    16f3: 50                           	pushl	%eax
+    16f4: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    16fa: 50                           	pushl	%eax
+    16fb: 89 f3                        	movl	%esi, %ebx
+    16fd: e8 be fa ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    1702: 83 c4 10                     	addl	$16, %esp
+    1705: 83 ec 08                     	subl	$8, %esp
+    1708: ff 75 b0                     	pushl	-80(%ebp)
+    170b: 50                           	pushl	%eax
+    170c: 89 f3                        	movl	%esi, %ebx
+    170e: e8 2d fb ff ff               	calll	0x1240 <.plt.sec+0xe0>
+    1713: 83 c4 10                     	addl	$16, %esp
+    1716: 83 ec 08                     	subl	$8, %esp
+    1719: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    171f: 52                           	pushl	%edx
+    1720: 50                           	pushl	%eax
+    1721: 89 f3                        	movl	%esi, %ebx
+    1723: e8 a8 fa ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    1728: 83 c4 10                     	addl	$16, %esp
+    172b: 83 ec 08                     	subl	$8, %esp
+    172e: 8d 86 24 e1 ff ff            	leal	-7900(%esi), %eax
+    1734: 50                           	pushl	%eax
+    1735: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    173b: 50                           	pushl	%eax
+    173c: 89 f3                        	movl	%esi, %ebx
+    173e: e8 7d fa ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    1743: 83 c4 10                     	addl	$16, %esp
+    1746: 83 ec 08                     	subl	$8, %esp
+    1749: 8d 55 b4                     	leal	-76(%ebp), %edx
+    174c: 52                           	pushl	%edx
+    174d: 50                           	pushl	%eax
+    174e: 89 f3                        	movl	%esi, %ebx
+    1750: e8 4b fa ff ff               	calll	0x11a0 <.plt.sec+0x40>
+    1755: 83 c4 10                     	addl	$16, %esp
+    1758: 83 ec 08                     	subl	$8, %esp
+    175b: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    1761: 52                           	pushl	%edx
+    1762: 50                           	pushl	%eax
+    1763: 89 f3                        	movl	%esi, %ebx
+    1765: e8 66 fa ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    176a: 83 c4 10                     	addl	$16, %esp
+    176d: 83 ec 08                     	subl	$8, %esp
+    1770: ff 75 ac                     	pushl	-84(%ebp)
+    1773: ff 75 a8                     	pushl	-88(%ebp)
+    1776: e8 32 fc ff ff               	calll	0x13ad <checkStageOne(int, int)>
+    177b: 83 c4 10                     	addl	$16, %esp
+    177e: 88 45 a3                     	movb	%al, -93(%ebp)
+    1781: 80 7d a3 00                  	cmpb	$0, -93(%ebp)
+    1785: 74 1d                        	je	0x17a4 <main+0x2bc>
+    1787: c7 45 a4 19 00 00 00         	movl	$25, -92(%ebp)
+    178e: 83 ec 08                     	subl	$8, %esp
+    1791: ff 75 b0                     	pushl	-80(%ebp)
+    1794: ff 75 a8                     	pushl	-88(%ebp)
+    1797: e8 77 fc ff ff               	calll	0x1413 <checkStageTwo(int, int)>
+    179c: 83 c4 10                     	addl	$16, %esp
+    179f: 88 45 a3                     	movb	%al, -93(%ebp)
+    17a2: eb 30                        	jmp	0x17d4 <main+0x2ec>
+    17a4: 83 ec 08                     	subl	$8, %esp
+    17a7: 8d 86 34 e1 ff ff            	leal	-7884(%esi), %eax
+    17ad: 50                           	pushl	%eax
+    17ae: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    17b4: 50                           	pushl	%eax
+    17b5: 89 f3                        	movl	%esi, %ebx
+    17b7: e8 04 fa ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    17bc: 83 c4 10                     	addl	$16, %esp
+    17bf: 83 ec 08                     	subl	$8, %esp
+    17c2: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    17c8: 52                           	pushl	%edx
+    17c9: 50                           	pushl	%eax
+    17ca: 89 f3                        	movl	%esi, %ebx
+    17cc: e8 ff f9 ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    17d1: 83 c4 10                     	addl	$16, %esp
+    17d4: 80 7d a3 00                  	cmpb	$0, -93(%ebp)
+    17d8: 74 3e                        	je	0x1818 <main+0x330>
+    17da: 83 45 a4 19                  	addl	$25, -92(%ebp)
+    17de: 83 ec 08                     	subl	$8, %esp
+    17e1: 8d 45 b4                     	leal	-76(%ebp), %eax
+    17e4: 50                           	pushl	%eax
+    17e5: 8d 45 cc                     	leal	-52(%ebp), %eax
+    17e8: 50                           	pushl	%eax
+    17e9: 89 f3                        	movl	%esi, %ebx
+    17eb: e8 80 f9 ff ff               	calll	0x1170 <.plt.sec+0x10>
+    17f0: 83 c4 10                     	addl	$16, %esp
+    17f3: 83 ec 0c                     	subl	$12, %esp
+    17f6: 8d 45 cc                     	leal	-52(%ebp), %eax
+    17f9: 50                           	pushl	%eax
+    17fa: e8 7d fc ff ff               	calll	0x147c <checkStageThree(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)>
+    17ff: 83 c4 10                     	addl	$16, %esp
+    1802: 88 45 a3                     	movb	%al, -93(%ebp)
+    1805: 83 ec 0c                     	subl	$12, %esp
+    1808: 8d 45 cc                     	leal	-52(%ebp), %eax
+    180b: 50                           	pushl	%eax
+    180c: 89 f3                        	movl	%esi, %ebx
+    180e: e8 6d f9 ff ff               	calll	0x1180 <.plt.sec+0x20>
+    1813: 83 c4 10                     	addl	$16, %esp
+    1816: eb 30                        	jmp	0x1848 <main+0x360>
+    1818: 83 ec 08                     	subl	$8, %esp
+    181b: 8d 86 44 e1 ff ff            	leal	-7868(%esi), %eax
+    1821: 50                           	pushl	%eax
+    1822: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    1828: 50                           	pushl	%eax
+    1829: 89 f3                        	movl	%esi, %ebx
+    182b: e8 90 f9 ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    1830: 83 c4 10                     	addl	$16, %esp
+    1833: 83 ec 08                     	subl	$8, %esp
+    1836: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    183c: 52                           	pushl	%edx
+    183d: 50                           	pushl	%eax
+    183e: 89 f3                        	movl	%esi, %ebx
+    1840: e8 8b f9 ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    1845: 83 c4 10                     	addl	$16, %esp
+    1848: 80 7d a3 00                  	cmpb	$0, -93(%ebp)
+    184c: 74 36                        	je	0x1884 <main+0x39c>
+    184e: 83 45 a4 19                  	addl	$25, -92(%ebp)
+    1852: 83 ec 08                     	subl	$8, %esp
+    1855: 8d 86 70 e1 ff ff            	leal	-7824(%esi), %eax
+    185b: 50                           	pushl	%eax
+    185c: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    1862: 50                           	pushl	%eax
+    1863: 89 f3                        	movl	%esi, %ebx
+    1865: e8 56 f9 ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    186a: 83 c4 10                     	addl	$16, %esp
+    186d: 83 ec 08                     	subl	$8, %esp
+    1870: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    1876: 52                           	pushl	%edx
+    1877: 50                           	pushl	%eax
+    1878: 89 f3                        	movl	%esi, %ebx
+    187a: e8 51 f9 ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    187f: 83 c4 10                     	addl	$16, %esp
+    1882: eb 30                        	jmp	0x18b4 <main+0x3cc>
+    1884: 83 ec 08                     	subl	$8, %esp
+    1887: 8d 86 bc e1 ff ff            	leal	-7748(%esi), %eax
+    188d: 50                           	pushl	%eax
+    188e: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    1894: 50                           	pushl	%eax
+    1895: 89 f3                        	movl	%esi, %ebx
+    1897: e8 24 f9 ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    189c: 83 c4 10                     	addl	$16, %esp
+    189f: 83 ec 08                     	subl	$8, %esp
+    18a2: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    18a8: 52                           	pushl	%edx
+    18a9: 50                           	pushl	%eax
+    18aa: 89 f3                        	movl	%esi, %ebx
+    18ac: e8 1f f9 ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    18b1: 83 c4 10                     	addl	$16, %esp
+    18b4: 83 ec 08                     	subl	$8, %esp
+    18b7: 8d 86 ee e1 ff ff            	leal	-7698(%esi), %eax
+    18bd: 50                           	pushl	%eax
+    18be: 8b 86 5c 00 00 00            	movl	92(%esi), %eax
+    18c4: 50                           	pushl	%eax
+    18c5: 89 f3                        	movl	%esi, %ebx
+    18c7: e8 f4 f8 ff ff               	calll	0x11c0 <.plt.sec+0x60>
+    18cc: 83 c4 10                     	addl	$16, %esp
+    18cf: 83 ec 08                     	subl	$8, %esp
+    18d2: ff 75 a4                     	pushl	-92(%ebp)
+    18d5: 50                           	pushl	%eax
+    18d6: 89 f3                        	movl	%esi, %ebx
+    18d8: e8 63 f9 ff ff               	calll	0x1240 <.plt.sec+0xe0>
+    18dd: 83 c4 10                     	addl	$16, %esp
+    18e0: 83 ec 08                     	subl	$8, %esp
+    18e3: 8b 96 58 00 00 00            	movl	88(%esi), %edx
+    18e9: 52                           	pushl	%edx
+    18ea: 50                           	pushl	%eax
+    18eb: 89 f3                        	movl	%esi, %ebx
+    18ed: e8 de f8 ff ff               	calll	0x11d0 <.plt.sec+0x70>
+    18f2: 83 c4 10                     	addl	$16, %esp
+    18f5: 83 ec 0c                     	subl	$12, %esp
+    18f8: 8d 45 b4                     	leal	-76(%ebp), %eax
+    18fb: 50                           	pushl	%eax
+    18fc: 89 f3                        	movl	%esi, %ebx
+    18fe: e8 7d f8 ff ff               	calll	0x1180 <.plt.sec+0x20>
+    1903: 83 c4 10                     	addl	$16, %esp
+    1906: b8 00 00 00 00               	movl	$0, %eax
+    190b: 8b 4d e4                     	movl	-28(%ebp), %ecx
+    190e: 65 33 0d 14 00 00 00         	xorl	%gs:20, %ecx
+    1915: 0f 84 81 00 00 00            	je	0x199c <main+0x4b4>
+    191b: eb 7a                        	jmp	0x1997 <main+0x4af>
+    191d: f3 0f 1e fb                  	endbr32
+    1921: 89 c7                        	movl	%eax, %edi
+    1923: 83 ec 0c                     	subl	$12, %esp
+    1926: 8d 45 a2                     	leal	-94(%ebp), %eax
+    1929: 50                           	pushl	%eax
+    192a: 89 f3                        	movl	%esi, %ebx
+    192c: e8 af f8 ff ff               	calll	0x11e0 <.plt.sec+0x80>
+    1931: 83 c4 10                     	addl	$16, %esp
+    1934: 89 f8                        	movl	%edi, %eax
+    1936: 83 ec 0c                     	subl	$12, %esp
+    1939: 50                           	pushl	%eax
+    193a: 89 f3                        	movl	%esi, %ebx
+    193c: e8 0f f9 ff ff               	calll	0x1250 <.plt.sec+0xf0>
+    1941: f3 0f 1e fb                  	endbr32
+    1945: 89 c7                        	movl	%eax, %edi
+    1947: 83 ec 0c                     	subl	$12, %esp
+    194a: 8d 45 a2                     	leal	-94(%ebp), %eax
+    194d: 50                           	pushl	%eax
+    194e: 89 f3                        	movl	%esi, %ebx
+    1950: e8 8b f8 ff ff               	calll	0x11e0 <.plt.sec+0x80>
+    1955: 83 c4 10                     	addl	$16, %esp
+    1958: eb 1f                        	jmp	0x1979 <main+0x491>
+    195a: f3 0f 1e fb                  	endbr32
+    195e: 89 c7                        	movl	%eax, %edi
+    1960: 83 ec 0c                     	subl	$12, %esp
+    1963: 8d 45 cc                     	leal	-52(%ebp), %eax
+    1966: 50                           	pushl	%eax
+    1967: 89 f3                        	movl	%esi, %ebx
+    1969: e8 12 f8 ff ff               	calll	0x1180 <.plt.sec+0x20>
+    196e: 83 c4 10                     	addl	$16, %esp
+    1971: eb 06                        	jmp	0x1979 <main+0x491>
+    1973: f3 0f 1e fb                  	endbr32
+    1977: 89 c7                        	movl	%eax, %edi
+    1979: 83 ec 0c                     	subl	$12, %esp
+    197c: 8d 45 b4                     	leal	-76(%ebp), %eax
+    197f: 50                           	pushl	%eax
+    1980: 89 f3                        	movl	%esi, %ebx
+    1982: e8 f9 f7 ff ff               	calll	0x1180 <.plt.sec+0x20>
+    1987: 83 c4 10                     	addl	$16, %esp
+    198a: 89 f8                        	movl	%edi, %eax
+    198c: 83 ec 0c                     	subl	$12, %esp
+    198f: 50                           	pushl	%eax
+    1990: 89 f3                        	movl	%esi, %ebx
+    1992: e8 b9 f8 ff ff               	calll	0x1250 <.plt.sec+0xf0>
+    1997: e8 54 01 00 00               	calll	0x1af0 <__stack_chk_fail_local>
+    199c: 8d 65 f0                     	leal	-16(%ebp), %esp
+    199f: 59                           	popl	%ecx
+    19a0: 5b                           	popl	%ebx
+    19a1: 5e                           	popl	%esi
+    19a2: 5f                           	popl	%edi
+    19a3: 5d                           	popl	%ebp
+    19a4: 8d 61 fc                     	leal	-4(%ecx), %esp
+    19a7: c3                           	retl
+
+000019a8 <__static_initialization_and_destruction_0(int, int)>:
+    19a8: f3 0f 1e fb                  	endbr32
+    19ac: 55                           	pushl	%ebp
+    19ad: 89 e5                        	movl	%esp, %ebp
+    19af: 53                           	pushl	%ebx
+    19b0: 83 ec 04                     	subl	$4, %esp
+    19b3: e8 f8 f8 ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    19b8: 81 c3 d8 25 00 00            	addl	$9688, %ebx
+    19be: 83 7d 08 01                  	cmpl	$1, 8(%ebp)
+    19c2: 75 3b                        	jne	0x19ff <__static_initialization_and_destruction_0(int, int)+0x57>
+    19c4: 81 7d 0c ff ff 00 00         	cmpl	$65535, 12(%ebp)
+    19cb: 75 32                        	jne	0x19ff <__static_initialization_and_destruction_0(int, int)+0x57>
+    19cd: 83 ec 0c                     	subl	$12, %esp
+    19d0: 8d 83 7d 00 00 00            	leal	125(%ebx), %eax
+    19d6: 50                           	pushl	%eax
+    19d7: e8 44 f8 ff ff               	calll	0x1220 <.plt.sec+0xc0>
+    19dc: 83 c4 10                     	addl	$16, %esp
+    19df: 83 ec 04                     	subl	$4, %esp
+    19e2: 8d 83 74 00 00 00            	leal	116(%ebx), %eax
+    19e8: 50                           	pushl	%eax
+    19e9: 8d 83 7d 00 00 00            	leal	125(%ebx), %eax
+    19ef: 50                           	pushl	%eax
+    19f0: 8b 83 6c 00 00 00            	movl	108(%ebx), %eax
+    19f6: 50                           	pushl	%eax
+    19f7: e8 94 f7 ff ff               	calll	0x1190 <.plt.sec+0x30>
+    19fc: 83 c4 10                     	addl	$16, %esp
+    19ff: 90                           	nop
+    1a00: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    1a03: c9                           	leave
+    1a04: c3                           	retl
+
+00001a05 <_GLOBAL__sub_I__Z13checkStageOneii>:
+    1a05: f3 0f 1e fb                  	endbr32
+    1a09: 55                           	pushl	%ebp
+    1a0a: 89 e5                        	movl	%esp, %ebp
+    1a0c: 83 ec 08                     	subl	$8, %esp
+    1a0f: e8 4b 00 00 00               	calll	0x1a5f <__x86.get_pc_thunk.ax>
+    1a14: 05 7c 25 00 00               	addl	$9596, %eax
+    1a19: 83 ec 08                     	subl	$8, %esp
+    1a1c: 68 ff ff 00 00               	pushl	$65535
+    1a21: 6a 01                        	pushl	$1
+    1a23: e8 80 ff ff ff               	calll	0x19a8 <__static_initialization_and_destruction_0(int, int)>
+    1a28: 83 c4 10                     	addl	$16, %esp
+    1a2b: c9                           	leave
+    1a2c: c3                           	retl
+
+00001a2d <bool std::operator==<char, std::char_traits<char>, std::allocator<char> >(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&, char const*)>:
+    1a2d: f3 0f 1e fb                  	endbr32
+    1a31: 55                           	pushl	%ebp
+    1a32: 89 e5                        	movl	%esp, %ebp
+    1a34: 53                           	pushl	%ebx
+    1a35: 83 ec 04                     	subl	$4, %esp
+    1a38: e8 22 00 00 00               	calll	0x1a5f <__x86.get_pc_thunk.ax>
+    1a3d: 05 53 25 00 00               	addl	$9555, %eax
+    1a42: 83 ec 08                     	subl	$8, %esp
+    1a45: ff 75 0c                     	pushl	12(%ebp)
+    1a48: ff 75 08                     	pushl	8(%ebp)
+    1a4b: 89 c3                        	movl	%eax, %ebx
+    1a4d: e8 0e f7 ff ff               	calll	0x1160 <.plt.sec>
+    1a52: 83 c4 10                     	addl	$16, %esp
+    1a55: 85 c0                        	testl	%eax, %eax
+    1a57: 0f 94 c0                     	sete	%al
+    1a5a: 8b 5d fc                     	movl	-4(%ebp), %ebx
+    1a5d: c9                           	leave
+    1a5e: c3                           	retl
+
+00001a5f <__x86.get_pc_thunk.ax>:
+    1a5f: 8b 04 24                     	movl	(%esp), %eax
+    1a62: c3                           	retl
+
+00001a63 <__x86.get_pc_thunk.si>:
+    1a63: 8b 34 24                     	movl	(%esp), %esi
+    1a66: c3                           	retl
+    1a67: 66 90                        	nop
+    1a69: 66 90                        	nop
+    1a6b: 66 90                        	nop
+    1a6d: 66 90                        	nop
+    1a6f: 90                           	nop
+
+00001a70 <__libc_csu_init>:
+    1a70: f3 0f 1e fb                  	endbr32
+    1a74: 55                           	pushl	%ebp
+    1a75: e8 6b 00 00 00               	calll	0x1ae5 <__x86.get_pc_thunk.bp>
+    1a7a: 81 c5 16 25 00 00            	addl	$9494, %ebp
+    1a80: 57                           	pushl	%edi
+    1a81: 56                           	pushl	%esi
+    1a82: 53                           	pushl	%ebx
+    1a83: 83 ec 0c                     	subl	$12, %esp
+    1a86: 89 eb                        	movl	%ebp, %ebx
+    1a88: 8b 7c 24 28                  	movl	40(%esp), %edi
+    1a8c: e8 6f f5 ff ff               	calll	0x1000 <_init>
+    1a91: 8d 9d f4 fe ff ff            	leal	-268(%ebp), %ebx
+    1a97: 8d 85 ec fe ff ff            	leal	-276(%ebp), %eax
+    1a9d: 29 c3                        	subl	%eax, %ebx
+    1a9f: c1 fb 02                     	sarl	$2, %ebx
+    1aa2: 74 29                        	je	0x1acd <__libc_csu_init+0x5d>
+    1aa4: 31 f6                        	xorl	%esi, %esi
+    1aa6: 8d b4 26 00 00 00 00         	leal	(%esi,%eiz), %esi
+    1aad: 8d 76 00                     	leal	(%esi), %esi
+    1ab0: 83 ec 04                     	subl	$4, %esp
+    1ab3: 57                           	pushl	%edi
+    1ab4: ff 74 24 2c                  	pushl	44(%esp)
+    1ab8: ff 74 24 2c                  	pushl	44(%esp)
+    1abc: ff 94 b5 ec fe ff ff         	calll	*-276(%ebp,%esi,4)
+    1ac3: 83 c6 01                     	addl	$1, %esi
+    1ac6: 83 c4 10                     	addl	$16, %esp
+    1ac9: 39 f3                        	cmpl	%esi, %ebx
+    1acb: 75 e3                        	jne	0x1ab0 <__libc_csu_init+0x40>
+    1acd: 83 c4 0c                     	addl	$12, %esp
+    1ad0: 5b                           	popl	%ebx
+    1ad1: 5e                           	popl	%esi
+    1ad2: 5f                           	popl	%edi
+    1ad3: 5d                           	popl	%ebp
+    1ad4: c3                           	retl
+    1ad5: 8d b4 26 00 00 00 00         	leal	(%esi,%eiz), %esi
+    1adc: 8d 74 26 00                  	leal	(%esi,%eiz), %esi
+
+00001ae0 <__libc_csu_fini>:
+    1ae0: f3 0f 1e fb                  	endbr32
+    1ae4: c3                           	retl
+
+00001ae5 <__x86.get_pc_thunk.bp>:
+    1ae5: 8b 2c 24                     	movl	(%esp), %ebp
+    1ae8: c3                           	retl
+    1ae9: 66 90                        	nop
+    1aeb: 66 90                        	nop
+    1aed: 66 90                        	nop
+    1aef: 90                           	nop
+
+00001af0 <__stack_chk_fail_local>:
+    1af0: f3 0f 1e fb                  	endbr32
+    1af4: 53                           	pushl	%ebx
+    1af5: e8 b6 f7 ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    1afa: 81 c3 96 24 00 00            	addl	$9366, %ebx
+    1b00: 83 ec 08                     	subl	$8, %esp
+    1b03: e8 e8 f6 ff ff               	calll	0x11f0 <.plt.sec+0x90>
+
+Disassembly of section .fini:
+
+00001b08 <_fini>:
+    1b08: f3 0f 1e fb                  	endbr32
+    1b0c: 53                           	pushl	%ebx
+    1b0d: 83 ec 08                     	subl	$8, %esp
+    1b10: e8 9b f7 ff ff               	calll	0x12b0 <__x86.get_pc_thunk.bx>
+    1b15: 81 c3 7b 24 00 00            	addl	$9339, %ebx
+    1b1b: 83 c4 08                     	addl	$8, %esp
+    1b1e: 5b                           	popl	%ebx
+    1b1f: c3                           	retl
