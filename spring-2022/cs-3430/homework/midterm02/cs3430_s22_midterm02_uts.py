@@ -216,22 +216,22 @@ class cs3430_s22_midterm02_uts(unittest.TestCase):
         plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=3, rn=15)
         plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=3, rn=15)
 
-        f = lambda x: -(x**2)
-        fstr = 'y=-x^2'
-        plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=100, rn=15)
-        plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=100, rn=15)
+    #     f = lambda x: -(x**2)
+    #     fstr = 'y=-x^2'
+    #     plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=100, rn=15)
+    #     plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=100, rn=15)
 
-        f = lambda x: math.sqrt(13)
-        fstr = 'y=sqrt(13)'
-        plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=10, rn=15)
-        plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=10, rn=15)
+    #     f = lambda x: math.sqrt(13)
+    #     fstr = 'y=sqrt(13)'
+    #     plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=10, rn=15)
+    #     plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=10, rn=15)
 
-        f = lambda x: math.sin(x) + math.cos(x) + 2*(math.sin(2*x) + math.cos(2*x))
-        fstr = 'y=sin(x)+cos(x)+2(sin(2x)+cos(2x))'
-        plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=10, rn=15)
-        plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=10, rn=15)
+    #     f = lambda x: math.sin(x) + math.cos(x) + 2*(math.sin(2*x) + math.cos(2*x))
+    #     fstr = 'y=sin(x)+cos(x)+2(sin(2x)+cos(2x))'
+    #     plot_fourier_nth_partial_sum(f, fstr, num_points=10000, num_coeffs=10, rn=15)
+    #     plot_fourier_nth_partial_sum_error(f, fstr, num_points=10000, num_coeffs=10, rn=15)
 
-        print('\ntest_mid02_06 passed...')
+    #     print('\ntest_mid02_06 passed...')
 
     ### ================ Problem 7: Unit Tests =====================
     ### No UTs

@@ -6,7 +6,6 @@ MyGame.screens['main-menu'] = (function(game) {
         document.getElementById('new-game-btn').addEventListener(
             'click',
             function() {
-                console.log("test");
                 game.showScreen('game-play'); 
             });
         

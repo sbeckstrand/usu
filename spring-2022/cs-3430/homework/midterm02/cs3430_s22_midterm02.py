@@ -85,15 +85,31 @@ Level 4 Error: (R_(x,2) - R((x-1),2)) / 15
 
 ## ========== Problem 6 ========================
 
+"""
+Couple notes about this problem. 
+
+1)  I am confident in my plot_fourier_nth_partial_sum results, 
+    but plotting it due takes a very long time. I believe that this 
+    is due to inefficiency with my rmb.rjl code, but im not entirely sure. 
+
+2)  I am not as confident in my plot_fourier_nth_partial_sum_error output. 
+    My undestanding is that the 'true error' should be the difference between the 
+    True Value (TV) and the approximated value (AV), but in my tests, the difference is always 0. 
+    Perhaps I am approximating incorrectly with the partial sum? 
+"""
 def fourier_s_n(f, num_coeffs, rn, x_val):
 
+    # Calculate a_0 coefficient
     a_zero = (1 / math.pi) * rmb.rjl(f, -math.pi, math.pi, rn, rn)
 
     total = 0
+
+    # Perform summation in s_n(x)
     for i in range(1, num_coeffs):
         extended_cos_func = lambda x: f(x) * math.cos(x * i)
         extended_sin_func = lambda x: f(x) * math.sin(x * i)
 
+        # Calculate the a_n and b_n coefficients
         an = (1 / math.pi) * rmb.rjl(extended_cos_func, -math.pi, math.pi, rn, rn)
         bn = (1 / math.pi) * rmb.rjl(extended_sin_func, -math.pi, math.pi, rn, rn)
 

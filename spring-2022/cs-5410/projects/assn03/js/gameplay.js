@@ -17,10 +17,16 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
     let player = objects.Player({
         imageSrc: 'assets/blob.png',
-        center: { x: graphics.canvas.width / 2, y: graphics.canvas.height / 2 },
+        center: { x: graphics.canvas.width / 2, y: graphics.canvas.height * 0.85 },
         size: { width: 20, height: 20 },
         moveRate: 500 / 1000    // pixels per millisecond
     });
+
+    let mushroom = objects.Mushroom({
+        imageSrc: 'assets/blob2.png',
+        center: { x: 100, y: 100 },
+        size: { width: 25, height: 25}
+    })
 
     function processInput(elapsedTime) {
         myKeyboard.update(elapsedTime);
@@ -34,6 +40,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     function render() {
         graphics.clear();
         renderer.Player.render(MyGame.player);
+        renderer.Mushroom.render(MyGame.mushroom);
         // renderer.Text.render(myText);
     }
 
@@ -84,6 +91,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
         input.Keyboard = myKeyboard;
         MyGame.player = player;
+        MyGame.mushroom = mushroom;
     }
 
     function run() {

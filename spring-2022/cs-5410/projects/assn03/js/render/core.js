@@ -1,6 +1,5 @@
 MyGame.graphics = (function() {
     'use strict';
-
     let canvas = document.getElementById('game-canvas');
     let context = canvas.getContext('2d');
 

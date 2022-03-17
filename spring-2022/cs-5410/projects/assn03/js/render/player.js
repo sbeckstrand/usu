@@ -15,7 +15,6 @@ MyGame.render.Player = (function(graphics) {
 
     function render(spec) {
         if (spec.imageReady) {
-            console.log("testing");
             graphics.drawTexture(spec.image, spec.center, spec.rotation, spec.size);
         }
     }

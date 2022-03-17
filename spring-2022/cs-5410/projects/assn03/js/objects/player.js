@@ -19,19 +19,40 @@ MyGame.objects.Player = function(spec) {
     }
 
     function moveLeft(elapsedTime) {
-        spec.center.x -= (spec.moveRate * elapsedTime);
+        if (spec.center.x - (spec.size.width / 2) >= 0 + (spec.size.width / 2)  ) {
+            spec.center.x -= (spec.moveRate * elapsedTime);
+        } else if (spec.center.x != 0 + (spec.size.width / 2)) {
+            spec.center.x = 0 + (spec.size.width / 2);
+        }
+        
     }
 
     function moveRight(elapsedTime) {
-        spec.center.x += (spec.moveRate * elapsedTime);
+        // console.log(`${spec.center.x}, ${spec.center.y}`)
+        if (spec.center.x + (spec.size.width / 2) <= MyGame.graphics.canvas.width - (spec.size.width / 2)  ) {
+            spec.center.x += (spec.moveRate * elapsedTime);
+        } else if (spec.center.x != MyGame.graphics.canvas.width - (spec.size.width / 2)) {
+            spec.center.x = MyGame.graphics.canvas.width - (spec.size.width / 2);
+        }
     }
 
     function moveUp(elapsedTime) {
-        spec.center.y -= (spec.moveRate * elapsedTime);
+        console.log(`${spec.center.x}, ${spec.center.y}`)
+        if (spec.center.y - (spec.size.height / 2) >= (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
+            spec.center.y -= (spec.moveRate * elapsedTime);
+        } else if (spec.center.y != (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
+            spec.center.y = (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)
+        }
+        
     }
 
     function moveDown(elapsedTime) {
-        spec.center.y += (spec.moveRate * elapsedTime);
+        // console.log(`${spec.center.x}, ${spec.center.y}`)
+        if (spec.center.y + (spec.size.height / 2) <= MyGame.graphics.canvas.height - (spec.size.height / 2)) {
+            spec.center.y += (spec.moveRate * elapsedTime);
+        } else if (spec.center.y != MyGame.graphics.canvas.height - (spec.size.height / 2)) {
+            spec.center.y = MyGame.graphics.canvas.height - (spec.size.height / 2);
+        }
     }
 
     function shoot(elapsedTime) {
