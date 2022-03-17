@@ -63,9 +63,9 @@
 
                         <div id="controls" class="screen text-light text-center">
                             <h1>Controls</h1>
-                            <form class="m-5">
-                                <div class="form-group row">
-                                    <label for="colFormLabel" class="col-sm-6 col-form-label">Move Up</label>
+                            <form class="m-5" id="input-form">
+                                <div class="form-group row text-left">
+                                    <label for="colFormLabel" class="col-sm-6 col-form-label text-left">Move Up</label>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="moveUp-p" >
                                     </div>
@@ -115,10 +115,10 @@
                                 </div>
                             </form>
 
-                            <button class="btn btn-outline-danger mt-3" id="controls-save">Save Changes</button>
+                            <button class="btn btn-outline-danger mt-3 text-center" id="controls-save">Save Changes</button>
 
                             <ul class = "menu">
-                                <li><button class="btn btn-outline-primary mt-3" id="controls-back">Back</button></li>
+                                <li><button class="btn btn-outline-primary mt-3 text-center" id="controls-back">Back</button></li>
                             </ul>
                         </div>
 
@@ -141,10 +141,12 @@
 
         <script>
             let MyGame = {
+                player: {},
                 screens : {},
                 input: {},
                 objects: {},
-                render: []
+                render: [],
+                controls: {}
             };
         </script>
 

@@ -28,13 +28,12 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     }
 
     function update() {
-        player.updateRotation(Math.PI / 150);   // Uh, oh, fixed per frame!!
+        
     }
 
     function render() {
         graphics.clear();
-
-        renderer.Player.render(player);
+        renderer.Player.render(MyGame.player);
         // renderer.Text.render(myText);
     }
 
@@ -84,6 +83,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // });
 
         input.Keyboard = myKeyboard;
+        MyGame.player = player;
     }
 
     function run() {

@@ -4,13 +4,13 @@ MyGame.objects.Player = function(spec) {
     'use strict';
 
     let rotation = 0;
-    let ready = false;
+    let imageReady = false;
     let image = new Image();
     let shots = []
     let ready_to_shoot = true;
 
     image.onload = function() {
-        ready = true;
+        imageReady = true;
     };
     image.src = spec.imageSrc; 
 

@@ -27,7 +27,9 @@ MyGame.input.Keyboard = function () {
     };
 
     that.deregisterAll = function() {
+        const escHandler = that.handlers['Escape']
         that.handlers = {}
+        that.handlers['Escape'] = escHandler
     }
 
     window.addEventListener('keydown', keyPress);

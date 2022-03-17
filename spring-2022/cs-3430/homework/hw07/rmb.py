@@ -15,14 +15,14 @@ class rmb(object):
         # if l == 1, apply trapezoidal rule for given value of j
         # If l > 1, rjl is computed as equation in slide 13 of lecture 14. 
         matrix = np.zeros((j, l), dtype=np.longdouble)
-        
+
+        for row in range(0, j):
+            n = 2 ** ((row + 1) - 1)
+            matrix[row,0] = rmb.t_rule(f, a, b, n)
+
         for col in range(0, l):
 
             for row in range(col, j):
-                if col == 0:
-                    n = 2 ** ((row + 1) - 1)
-                    matrix[row,col] = rmb.t_rule(f, a, b, n)
-                else: 
                     r1 = matrix[row, col - 1]
                     r2 = matrix[row - 1, col -1]
                     den = (4 ** (col)) - 1

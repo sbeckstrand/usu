@@ -14,7 +14,8 @@ MyGame.render.Player = (function(graphics) {
     'use strict';
 
     function render(spec) {
-        if (spec.ready) {
+        if (spec.imageReady) {
+            console.log("testing");
             graphics.drawTexture(spec.image, spec.center, spec.rotation, spec.size);
         }
     }
