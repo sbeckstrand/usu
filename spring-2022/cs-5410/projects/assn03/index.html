@@ -141,8 +141,13 @@
 
         <script>
             let MyGame = {
+                score: 0,
+                lives: 0,
                 player: {},
-                mushrooms: {},
+                shots: [],
+                playerIcon: {},
+                mushrooms: [],
+                mushroomGrid: [],
                 screens : {},
                 input: {},
                 objects: {},
@@ -153,11 +158,12 @@
 
         <script src="js/objects/player.js"></script> <!-- Build Player object -->
         <script src="js/objects/mushroom.js"></script>
+        <script src="js/objects/text.js"></script>
         
         <script src="js/render/core.js"></script> <!-- Core rendering code to render content to the canvas-->
-        
         <script src="js/render/player.js"></script> <!-- Render player to canvas-->
-        <script src="js/render/mushroom.js"</script></script>
+        <script src="js/render/mushroom.js"></script>
+        <script src="js/render/text.js"></script>
         
         <script src="js/input-keyboard.js"></script>
 

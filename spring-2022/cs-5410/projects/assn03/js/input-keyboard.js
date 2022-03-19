@@ -5,11 +5,14 @@ MyGame.input.Keyboard = function () {
     };
 
     function keyPress(e) {
-        that.keys[e.key] = e.timeStamp;
+        if (e.keyCode == 32 && e.target == document.body) {
+            e.preventDefault();
+        }
+        that.keys[e.keyCode] = e.timeStamp;
     }
 
     function keyRelease(e) {
-        delete that.keys[e.key];
+        delete that.keys[e.keyCode];
     }
 
     that.update = function (elapsedTime) {
