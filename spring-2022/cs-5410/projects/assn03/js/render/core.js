@@ -5,6 +5,9 @@ MyGame.graphics = (function() {
 
     function clear() {
         context.clearRect(0, 0, canvas.width, canvas.height);
+
+        context.fillStyle = "black";
+        context.fillRect(0, 0, canvas.width, canvas.height);
     }
 
     function drawTexture(image, center, rotation, size) {
@@ -16,6 +19,26 @@ MyGame.graphics = (function() {
 
         context.drawImage(
             image,
+            center.x - size.width / 2,
+            center.y - size.height / 2,
+            size.width, size.height);
+
+        context.restore();
+    }
+
+    function drawSubTexture(image, center, rotation, start, subSize, size) {
+        context.save();
+
+        context.translate(center.x, center.y);
+        context.rotate(rotation);
+        context.translate(-center.x, -center.y);
+
+        context.drawImage(
+            image,
+            start.x,
+            start.y,
+            subSize.width,
+            subSize.height,
             center.x - size.width / 2,
             center.y - size.height / 2,
             size.width, size.height);
@@ -61,6 +84,7 @@ MyGame.graphics = (function() {
         get canvas() { return canvas; },
         clear: clear,
         drawTexture: drawTexture,
+        drawSubTexture: drawSubTexture,
         drawText: drawText,
         drawShot: drawShot
     };

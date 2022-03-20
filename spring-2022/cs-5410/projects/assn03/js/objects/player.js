@@ -9,6 +9,7 @@ MyGame.objects.Player = function(spec) {
     let readyToShoot = true;
     let shotTimer = 5;
     let previousShotTime = 0;
+    let start = {x: spec.startX, y: spec.startY};
 
     image.onload = function() {
         imageReady = true;
@@ -17,6 +18,21 @@ MyGame.objects.Player = function(spec) {
 
     function updateRotation(diff) {
         rotation += diff;
+    }
+
+    function updateShots(elapsedTime) {
+        // Update shot timer
+        if (shotTimer > 0) {
+            shotTimer -= elapsedTime;
+        } else {
+            readyToShoot = true;
+        }
+
+        // Update shot position
+        for (let shot in MyGame.shots) {
+            const curr_y = MyGame.shots[shot].y
+            MyGame.shots[shot].y = curr_y - 10;
+        }
     }
 
     function checkForPlayerCollision() {
@@ -37,33 +53,104 @@ MyGame.objects.Player = function(spec) {
         let shotCollisions = [];
         
         for (let shot in MyGame.shots) {
+            let all_objects = [];
+            // Check for mushroom collisions
             for (let mushroom in MyGame.mushrooms) {
+                all_objects.push(MyGame.mushrooms[mushroom]);
+
+            }
+
+            if (typeof MyGame.spider != 'undefined') {
+                all_objects.push(MyGame.spider);
+            }
+
+            if (typeof MyGame.scorpion != 'undefined') {
+                all_objects.push(MyGame.scorpion);
+            }
+
+            if (typeof MyGame.flea != 'undefined') {
+                all_objects.push(MyGame.flea);
+            }
+
+            for (const obj in all_objects) {
                 let inXBound = false;
                 let inYBound = false;
-                const mushroomCenter = MyGame.mushrooms[mushroom].center;
-                const mushroomWidth = MyGame.mushrooms[mushroom].size.width;
-                const mushroomHeight = MyGame.mushrooms[mushroom].size.height;
+                const objectCenter = all_objects[obj].center;
+                const objectWidth = all_objects[obj].size.width;
+                const objectHeight = all_objects[obj].size.height;
 
 
-                if (mushroomCenter.x - (mushroomWidth / 2) <= MyGame.shots[shot].x &&  MyGame.shots[shot].x <= mushroomCenter.x + (mushroomWidth / 2)) {
+                if (objectCenter.x - (objectWidth / 2) <= MyGame.shots[shot].x &&  MyGame.shots[shot].x <= objectCenter.x + (objectWidth / 2)) {
                     inXBound = true;
                 }
 
-                if (mushroomCenter.y - (mushroomHeight / 2) <= MyGame.shots[shot].y && MyGame.shots[shot].y <= mushroomCenter.y + (mushroomHeight / 2)) {
+                if (objectCenter.y - (objectHeight / 2) <= MyGame.shots[shot].y && MyGame.shots[shot].y <= objectCenter.y + (objectHeight / 2)) {
                     inYBound = true;
                 }
 
                 if (inXBound && inYBound) {
                     const collision = {
                         "shot": MyGame.shots[shot],
-                        "object": MyGame.mushrooms[mushroom]
+                        "object": all_objects[obj]
                     }
                     shotCollisions.push(collision);
                 }
             }
+
         }
 
         return shotCollisions;
+    }
+
+    function handleShotCollisions() {
+        const collisions = checkForShotCollision()
+        if (Object.keys(collisions).length > 0) {
+            for (const collision in collisions) {
+                MyGame.shots = MyGame.shots.filter(function( obj ) {
+                    return obj != collisions[collision]["shot"];
+                });
+
+                const collision_object = collisions[collision]["object"];
+
+                if (collision_object.type == "mushroom") {
+                    let mushroomIndex = MyGame.mushrooms.findIndex(element => element == collision_object)
+                    let mushroom = MyGame.mushrooms[mushroomIndex];
+                    
+                    mushroom.updateState();
+                    
+                    const mushroomState = mushroom.state;
+                    
+                    if (mushroomState == 2) {
+                        mushroom.updateStart({x: 72, y: 8});
+                    } else if (mushroomState == 3) {
+                        mushroom.updateStart({x: 80, y: 8});
+                    } else if (mushroomState == 4) {
+                        mushroom.updateStart({x: 88, y: 8});
+                    } else if (mushroomState > 4) {
+
+                        MyGame.mushrooms = MyGame.mushrooms.filter(element => element != mushroom);
+                    }
+                    MyGame.score += 1;
+                }
+
+                if (collision_object.type == "spider") {
+                    delete MyGame.spider;
+                    MyGame.score += 300;
+                }
+
+                if (collision_object.type == "scorpion") {
+                    delete MyGame.scorpion;
+                    MyGame.score += 500;
+                }
+
+                if (collision_object.type == "flea") {
+                    delete MyGame.flea;
+                    MyGame.score += 300;
+                }
+                
+
+            }
+        }
     }
 
     function moveLeft(elapsedTime) {
@@ -135,9 +222,8 @@ MyGame.objects.Player = function(spec) {
         if (readyToShoot) {
             
             readyToShoot = false; 
-            shotTimer = 250;
+            shotTimer = 100;
 
-            console.log("pew pew");
             MyGame.shots.push({
                 x: spec.center.x,
                 y: spec.center.y
@@ -152,13 +238,6 @@ MyGame.objects.Player = function(spec) {
         spec.center.y = pos.y;
     }
 
-    function updateShotStatus(elapsedTime) {
-        if (shotTimer > 0) {
-            shotTimer -= elapsedTime;
-        } else {
-            readyToShoot = true;
-        }
-    }
     let api = {
         updateRotation: updateRotation,
         moveLeft: moveLeft,
@@ -167,13 +246,15 @@ MyGame.objects.Player = function(spec) {
         moveDown: moveDown,
         moveTo: moveTo,
         shoot: shoot,
-        updateShotStatus: updateShotStatus,
         checkForShotCollision: checkForShotCollision,
+        updateShots: updateShots,
+        handleShotCollisions: handleShotCollisions,
         get imageReady() { return imageReady; },
         get rotation() { return rotation; },
         get image() { return image; },
         get center() { return spec.center; },
-        get size() { return spec.size; }
+        get size() { return spec.size; },
+        get start() { return start; }
     };
 
     return api;

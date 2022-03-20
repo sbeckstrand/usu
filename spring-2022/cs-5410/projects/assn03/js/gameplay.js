@@ -5,7 +5,6 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     let cancelNextRequest = true;
 
     let myKeyboard = input.Keyboard();
-    // let myMouse = input.Mouse();
 
     let myText = objects.Text({
         text: `Score: ${MyGame.score}`,
@@ -16,28 +15,29 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     });
 
     let player = objects.Player({
-        imageSrc: 'assets/blob.png',
+        imageSrc: 'assets/sprites.png',
         center: { x: graphics.canvas.width / 2, y: graphics.canvas.height * 0.85 },
+        startX: 0,
+        startY: 80,
         size: { width: 25, height: 25 },
-        moveRate: 500 / 1000    // pixels per millisecond
+        moveRate: 300 / 1000    // pixels per millisecond
     });
 
     let PlayerIcon = {
-        imageSrc: 'assets/blob.png',
+        imageSrc: 'assets/sprites.png',
         center: { x: graphics.canvas.width / 2, y:  12.5 },
         size: { width: 25, height: 25 },
-        rotation: 0
+        rotation: 0,
+        startX: 0,
+        startY: 80
     }
 
     PlayerIcon.image = new Image();
     PlayerIcon.image.src = PlayerIcon.imageSrc;
 
-
-    let mushroom = objects.Mushroom({
-        imageSrc: 'assets/mushroom1.png',
-        center: { x: 100, y: 100 },
-        size: { width: 25, height: 25}
-    })
+    let fleaTimer = 1000;
+    let spiderTimer = 1000;
+    let scorpionTimer = 1000;
 
     function processInput(elapsedTime) {
         myKeyboard.update(elapsedTime);
@@ -50,55 +50,120 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         myText.setText(`Score: ${MyGame.score}`);
         
         // Shot Updates
-        MyGame.player.updateShotStatus(elapsedTime); // Update Shot Timer
-        for (let shot in MyGame.shots) {
-            const curr_y = MyGame.shots[shot].y
-            MyGame.shots[shot].y = curr_y - 10;
+        MyGame.player.updateShots(elapsedTime);
+        MyGame.player.handleShotCollisions();
+
+        // Flea
+        if (fleaTimer > 0 && typeof MyGame.flea == "undefined") {
+            fleaTimer -= elapsedTime;
         }
-        const collisions = MyGame.player.checkForShotCollision()
-        if (Object.keys(collisions).length > 0) {
-            for (const collision in collisions) {
-                MyGame.shots = MyGame.shots.filter(function( obj ) {
-                    return obj != collisions[collision]["shot"];
-                });
 
-                const collision_object = collisions[collision]["object"];
+        if (fleaTimer <= 0) {
+            const rand_x = Math.floor(Math.random() * 39) + 1;
 
-                if (collision_object.type == "mushroom") {
-                    collision_object.updateState();
+            let flea = objects.Flea({
+                imageSrc: 'assets/sprites.png',
+                center: { x: (25 * rand_x) + 12.5, y: 50 + 12.5},
+                size: { width: 25, height: 25},
+                startX: 64,
+                startY: 32
+            })
 
-                    
-                }
-                console.log(collisions[collision]["object"].type)
-                
+            MyGame.flea = flea;
+            fleaTimer = 15000;
+        }
 
+        // Scorpion
+        if (scorpionTimer > 0 && typeof MyGame.scorpion == "undefined") {
+            scorpionTimer -= elapsedTime;
+        }
+
+        if (scorpionTimer <= 0) {
+            let rand_y = 0;
+            const rand_x = Math.round(Math.random());
+            let position_x = (rand_x == 0) ? 0 + 25 : graphics.canvas.width - 25;
+            const direction = (rand_x == 0) ? "right" : "left";
+            while (rand_y < 6) {
+                rand_y = Math.floor(Math.random() * 30) + 1;
             }
+
+            let scorpion = objects.Scorpion({
+                imageSrc: 'assets/sprites.png',
+                center: { x: position_x, y: (25 * rand_y) + 25},
+                size: { width: 50, height: 25},
+                startX: 0,
+                startY: 56
+            })
+
+            MyGame.scorpion = scorpion;
+            scorpionTimer = 60000;
         }
 
-        // Update Object state
+        // Spider
+        if (spiderTimer > 0 && typeof MyGame.spider == 'undefined') {
+            spiderTimer -= elapsedTime;
+        }
 
-        // Update Lives
+        if (spiderTimer <= 0) {
+            let rand_y = 0;
+            const rand_x = Math.round(Math.random());
+            let position_x = (rand_x == 0) ? 0 + 25 : graphics.canvas.width - 25;
+            const direction = (rand_x == 0) ? "right" : "left";
+            while (rand_y < 26) {
+                rand_y = Math.floor(Math.random() * 30) + 1;
+            }
+
+            let spider = objects.Spider({
+                imageSrc: 'assets/sprites.png',
+                center: { x: position_x, y: (25 * rand_y) + 25},
+                size: {width: 50, height: 25},
+                startX: 0,
+                startY: 40
+
+            })
+
+            MyGame.spider = spider;
+            spiderTimer = 10000;
+        }
     }
 
     function render() {
         graphics.clear();
+
+        // Render Player
         renderer.Player.render(MyGame.player);
 
-        for (mushroom in MyGame.mushrooms) {
+        // Render Mushrooms
+        for (const mushroom in MyGame.mushrooms) {
             renderer.Mushroom.render(MyGame.mushrooms[mushroom]);
         }
         
-        
+        // Render Text
         renderer.Text.render(myText);
-        renderer.Player.render(MyGame.PlayerIcon)
 
-        
+        // Render Remaining Lives Indicator
         for (let i = 0; i < MyGame.lives; i++) {
-            MyGame.graphics.drawTexture(PlayerIcon.image, {x: PlayerIcon.center.x + (i * (PlayerIcon.size.width + 10)), y: PlayerIcon.center.y}, PlayerIcon.rotation, PlayerIcon.size);
+            MyGame.graphics.drawSubTexture(PlayerIcon.image, {x: PlayerIcon.center.x + (i * (PlayerIcon.size.width + 10)), y: PlayerIcon.center.y}, PlayerIcon.rotation, {x: PlayerIcon.startX, y: PlayerIcon.startY}, {width: 8, height: 8}, PlayerIcon.size);
         }
 
+        // Render Shots
         for (let shot in MyGame.shots) {
             MyGame.graphics.drawShot(MyGame.shots[shot]);
+        }
+
+        // Render Flea (if ready)
+        if (typeof MyGame.flea != 'undefined') {
+            renderer.Flea.render(MyGame.flea);
+        }
+
+        // Render Scorpion (if ready)
+        if (typeof MyGame.scorpion != 'undefined') {
+            renderer.Scorpion.render(MyGame.scorpion);
+        }
+
+        // Render Spider(if ready)
+        if (typeof MyGame.spider != 'undefined') {
+            renderer.Spider.render(MyGame.spider);
         }
     }
 
@@ -116,12 +181,32 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     }
 
     function initialize() {
-        myKeyboard.register(83, player.moveDown);
-        myKeyboard.register(87, player.moveUp);
-        myKeyboard.register(65, player.moveLeft);
-        myKeyboard.register(68, player.moveRight);
-        myKeyboard.register(32, player.shoot);
-        myKeyboard.register(27, function() {
+        // Register Controls
+        if (typeof localStorage.controls == "undefined") {
+            myKeyboard.register('KeyS', player.moveDown);
+            myKeyboard.register('KeyW', player.moveUp);
+            myKeyboard.register('KeyA', player.moveLeft);
+            myKeyboard.register('KeyD', player.moveRight);
+            myKeyboard.register('Space', player.shoot);
+        } else {
+            const controls = JSON.parse(localStorage.controls);
+
+            for (const control in controls) {
+                if (controls[control] == "moveUp") {
+                    myKeyboard.register(control, player.moveUp);
+                } else if (controls[control] == "moveLeft") {
+                    myKeyboard.register(control, player.moveLeft);
+                } else if (controls[control] == "moveDown") {
+                    myKeyboard.register(control, player.moveDown);
+                } else if (controls[control] == "moveRight") {
+                    myKeyboard.register(control, player.moveRight);
+                } else if (controls[control] == "shoot") {
+                    myKeyboard.register(control, player.shoot);
+                }
+            }
+        }
+        
+        myKeyboard.register('Escape', function() {
             //
             // Stop the game loop by canceling the request for the next animation frame
             cancelNextRequest = true;
@@ -160,16 +245,18 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 
                 
                 let mushroom = objects.Mushroom({
-                    imageSrc: 'assets/mushroom1.png',
+                    imageSrc: 'assets/sprites.png',
                     center: { x: (25 * rand_x) - 12.5, y: (25 * rand_y) - 12.5},
-                    size: { width: 25, height: 25}
+                    size: { width: 25, height: 25},
+                    startX: 64,
+                    startY: 8
                 })
                 
                 const distance = Math.sqrt(Math.pow(Math.abs(player.center.x - mushroom.center.x), 2) + Math.pow(Math.abs(player.center.y - mushroom.center.y), 2))
 
                 if (MyGame.mushroomGrid[rand_y][rand_x] == 0 && distance > 2 * mushroom.size.width) {
                     MyGame.mushrooms.push(mushroom);
-                    MyGame.mushroomGrid[rand_y][rand_x] = mushroom;
+                    MyGame.mushroomGrid[rand_y][rand_x] = 1;
                     placed = true;
                 }
 

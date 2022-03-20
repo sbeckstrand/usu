@@ -15,7 +15,7 @@ MyGame.render.Player = (function(graphics) {
 
     function render(spec) {
         if (spec.imageReady) {
-            graphics.drawTexture(spec.image, spec.center, spec.rotation, spec.size);
+            graphics.drawSubTexture(spec.image, spec.center, spec.rotation, spec.start, {width: 8, height: 8}, spec.size);
         }
     }
 

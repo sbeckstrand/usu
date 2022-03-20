@@ -8,11 +8,11 @@ MyGame.input.Keyboard = function () {
         if (e.keyCode == 32 && e.target == document.body) {
             e.preventDefault();
         }
-        that.keys[e.keyCode] = e.timeStamp;
+        that.keys[e.code] = e.timeStamp;
     }
 
     function keyRelease(e) {
-        delete that.keys[e.keyCode];
+        delete that.keys[e.code];
     }
 
     that.update = function (elapsedTime) {

@@ -67,7 +67,7 @@
                                 <div class="form-group row text-left">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label text-left">Move Up</label>
                                     <div class="col-sm-3">
-                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveUp-p" >
+                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveUp-p" required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="moveUp-s" >
@@ -77,7 +77,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Move Left</label>
                                     <div class="col-sm-3">
-                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveLeft-p" >
+                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveLeft-p" required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="moveLeft-s" >
@@ -87,7 +87,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Move Down</label>
                                     <div class="col-sm-3">
-                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveDown-p" >
+                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveDown-p" required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="moveDown-s" >
@@ -97,7 +97,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Move Right</label>
                                     <div class="col-sm-3">
-                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveRight-p" >
+                                        <input type="email" class="form-control bg-dark text-center text-white" id="moveRight-p" required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="moveRight-s" >
@@ -107,7 +107,7 @@
                                 <div class="form-group row">
                                     <label for="colFormLabel" class="col-sm-6 col-form-label">Shoot</label>
                                     <div class="col-sm-3">
-                                        <input type="email" class="form-control bg-dark text-center text-white" id="shoot-p" >
+                                        <input type="email" class="form-control bg-dark text-center text-white" id="shoot-p" required>
                                     </div>
                                     <div class="col-sm-3">
                                         <input type="email" class="form-control bg-dark text-center text-white" id="shoot-s" >
@@ -115,7 +115,7 @@
                                 </div>
                             </form>
 
-                            <button class="btn btn-outline-danger mt-3 text-center" id="controls-save">Save Changes</button>
+                            <button class="btn btn-outline-danger mt-3 text-center" id="controls-save" disabled>Save Changes</button>
 
                             <ul class = "menu">
                                 <li><button class="btn btn-outline-primary mt-3 text-center" id="controls-back">Back</button></li>
@@ -159,10 +159,16 @@
         <script src="js/objects/player.js"></script> <!-- Build Player object -->
         <script src="js/objects/mushroom.js"></script>
         <script src="js/objects/text.js"></script>
+        <script src="js/objects/flea.js"></script>
+        <script src="js/objects/scorpion.js"></script>
+        <script src="js/objects/spider.js"></script>
         
         <script src="js/render/core.js"></script> <!-- Core rendering code to render content to the canvas-->
         <script src="js/render/player.js"></script> <!-- Render player to canvas-->
         <script src="js/render/mushroom.js"></script>
+        <script src="js/render/flea.js"></script>
+        <script src="js/render/scorpion.js"></script>
+        <script src="js/render/spider.js"></script>
         <script src="js/render/text.js"></script>
         
         <script src="js/input-keyboard.js"></script>

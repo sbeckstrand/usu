@@ -1,4 +1,4 @@
-MyGame.render.Mushroom = (function(graphics) {
+MyGame.render.Flea = (function(graphics) {
     'use strict';
 
     function render(spec) {

@@ -31,11 +31,10 @@ MyGame.screens['controls'] = (function(game, input, player) {
                 if (i == 0 ? id_val += "-p" : id_val += "-s" )
 
                 if (typeof temp_controls[actions[action]][i] != 'undefined') {
-                    console.log(actions[action])
-                    if (temp_controls[actions[action]][i].length == 1) {
-                        document.getElementById(id_val).value=temp_controls[actions[action]][i].toUpperCase();
+                    if (temp_controls[actions[action]][i].substring(0,3) == "Key") {
+                        document.getElementById(id_val).value=temp_controls[actions[action]][i][3];
                     } else {
-                        document.getElementById(id_val).value=temp_controls[actions[action]][i]
+                        document.getElementById(id_val).value=temp_controls[actions[action]][i];
                     }
                     
                 } else {
@@ -51,15 +50,17 @@ MyGame.screens['controls'] = (function(game, input, player) {
                 inputFields[field].addEventListener(
                     'keydown',
                     function(e) {
+                        console.log(e)
                         e.preventDefault();
 
-                        
                         let input_val = "";
                         if (e.code.substring(0,3) == "Key") {
                             input_val = e.code[3];
                         } else {
                             input_val = e.code;
                         }
+
+                        console.log(inputFields[field].value)
 
                         // Check for duplicates
                         for (let field in inputFields) {
@@ -71,9 +72,47 @@ MyGame.screens['controls'] = (function(game, input, player) {
                         }
 
                         this.value = input_val;
+                        
+                        const saveButton = document.getElementById('controls-save');
+                        saveButton.disabled = !(readyToSave());
+                        console.log(readyToSave());
+
+                        
                     }
                 )
             }
+        }
+
+        function readyToSave() {
+            let ready = true;
+
+            if (document.getElementById('moveUp-p').value == "") {
+                ready = false;
+            }
+
+            if (document.getElementById('moveDown-p').value == "") {
+                ready = false;
+            }
+
+            if (document.getElementById('moveLeft-p').value == "") {
+                ready = false;
+            }
+
+            if (document.getElementById('moveRight-p').value == "") {
+                ready = false;
+            }
+
+            if (document.getElementById('shoot-p').value == "") {
+                ready = false;
+            }
+
+            console.log(document.getElementById('moveUp-p').value);
+            console.log(document.getElementById('moveDown-p').value);
+            console.log(document.getElementById('moveLeft-p').value);
+            console.log(document.getElementById('moveRight-p').value);
+            console.log(document.getElementById('shoot-p').value);
+
+            return ready;
         }
 
         document.getElementById('controls-back').addEventListener(
@@ -86,13 +125,14 @@ MyGame.screens['controls'] = (function(game, input, player) {
             function() { 
                 input.Keyboard.deregisterAll()
 
+                let controls = {}
                 for (let field in inputFields) {
                     if (typeof inputFields[field] == 'object') {
                         const id_val = inputFields[field].id.split("-")[0];
                         let input_val = "";
 
                         if (inputFields[field].value.length == 1) {
-                            input_val = inputFields[field].value.toLowerCase();
+                            input_val = "Key" + inputFields[field].value
                         } else {
                             input_val = inputFields[field].value;
                         }
@@ -109,10 +149,17 @@ MyGame.screens['controls'] = (function(game, input, player) {
                             } else if (id_val == "shoot") {
                                 input.Keyboard.register(input_val, MyGame.player.shoot);
                             }
+
+                            controls[input_val] = id_val;
                         }
+
+                        
                     }
                 }
-
+                localStorage.controls = JSON.stringify(controls);
+                document.getElementById('controls-save').classList.remove('btn-outline-danger');
+                document.getElementById('controls-save').classList.add('btn-outline-success');
+                document.getElementById('controls-save').disabled = true;
             }
         );
     }
@@ -122,9 +169,6 @@ MyGame.screens['controls'] = (function(game, input, player) {
         // I know this is empty, there isn't anything to do.
     }
 
-    function saveControls() {
-        console.log("blah");
-    }
     
     return {
         initialize : initialize,
