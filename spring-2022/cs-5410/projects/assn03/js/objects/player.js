@@ -10,6 +10,7 @@ MyGame.objects.Player = function(spec) {
     let shotTimer = 5;
     let previousShotTime = 0;
     let start = {x: spec.startX, y: spec.startY};
+    
 
     image.onload = function() {
         imageReady = true;
@@ -113,6 +114,10 @@ MyGame.objects.Player = function(spec) {
                 const collision_object = collisions[collision]["object"];
 
                 if (collision_object.type == "mushroom") {
+
+                    let mushHit = new Audio('assets/mushroomhit.mp3')
+                    mushHit.play();
+
                     let mushroomIndex = MyGame.mushrooms.findIndex(element => element == collision_object)
                     let mushroom = MyGame.mushrooms[mushroomIndex];
                     
@@ -133,17 +138,27 @@ MyGame.objects.Player = function(spec) {
                     MyGame.score += 1;
                 }
 
+                
                 if (collision_object.type == "spider") {
+                    let creatureHit = new Audio('assets/creaturehit.wav')
+                    creatureHit.play()
+
                     delete MyGame.spider;
                     MyGame.score += 300;
                 }
 
                 if (collision_object.type == "scorpion") {
+                    let creatureHit = new Audio('assets/creaturehit.wav')
+                    creatureHit.play()
+
                     delete MyGame.scorpion;
                     MyGame.score += 500;
                 }
 
                 if (collision_object.type == "flea") {
+                    let creatureHit = new Audio('assets/creaturehit.wav')
+                    creatureHit.play()
+
                     delete MyGame.flea;
                     MyGame.score += 300;
                 }
@@ -223,6 +238,9 @@ MyGame.objects.Player = function(spec) {
             
             readyToShoot = false; 
             shotTimer = 100;
+
+            let shotAudio = new Audio('assets/laser.wav')
+            shotAudio.play();
 
             MyGame.shots.push({
                 x: spec.center.x,

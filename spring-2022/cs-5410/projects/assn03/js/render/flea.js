@@ -3,7 +3,7 @@ MyGame.render.Flea = (function(graphics) {
 
     function render(spec) {
         if (spec.imageReady) {
-            graphics.drawSubTexture(spec.image, spec.center, 0, spec.start, {width: 8, height: 8}, spec.size);
+            graphics.drawSubTexture(spec.image, spec.center, 0, spec.start, {width: 9, height: 8}, spec.size);
         }
     }
 

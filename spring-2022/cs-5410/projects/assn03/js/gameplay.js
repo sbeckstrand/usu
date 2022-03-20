@@ -56,6 +56,8 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // Flea
         if (fleaTimer > 0 && typeof MyGame.flea == "undefined") {
             fleaTimer -= elapsedTime;
+        } else {
+            MyGame.flea.update(elapsedTime);
         }
 
         if (fleaTimer <= 0) {
@@ -66,7 +68,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 center: { x: (25 * rand_x) + 12.5, y: 50 + 12.5},
                 size: { width: 25, height: 25},
                 startX: 64,
-                startY: 32
+                startY: 32,
+                spriteCount: 4,
+                spriteTime: [250, 250, 250, 250]
             })
 
             MyGame.flea = flea;
@@ -217,6 +221,22 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
         MyGame.lives = 3
         MyGame.shots = []
+
+        if (typeof MyGame.flea != "undefined") {
+            fleaTimer = 1000;
+            delete MyGame.flea;
+        }
+
+        if (typeof MyGame.spider != "undefined") {
+            spiderTimer = 1000;
+            delete MyGame.spider;
+        }
+
+        if (typeof MyGame.scorpion != "undefined") {
+            scorpionTimer = 1000;
+            delete MyGame.scorpion;
+        }
+
         
         
         MyGame.render.push(MyGame.PlayerIcon)
