@@ -80,6 +80,8 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // Scorpion
         if (scorpionTimer > 0 && typeof MyGame.scorpion == "undefined") {
             scorpionTimer -= elapsedTime;
+        } else {
+            MyGame.scorpion.update(elapsedTime);
         }
 
         if (scorpionTimer <= 0) {
@@ -96,7 +98,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 center: { x: position_x, y: (25 * rand_y) + 25},
                 size: { width: 50, height: 25},
                 startX: 0,
-                startY: 56
+                startY: 56,
+                spriteCount: 4,
+                spriteTime: [250, 250, 250, 250]
             })
 
             MyGame.scorpion = scorpion;
@@ -106,6 +110,8 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // Spider
         if (spiderTimer > 0 && typeof MyGame.spider == 'undefined') {
             spiderTimer -= elapsedTime;
+        } else {
+            MyGame.spider.update(elapsedTime);
         }
 
         if (spiderTimer <= 0) {
@@ -122,7 +128,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 center: { x: position_x, y: (25 * rand_y) + 25},
                 size: {width: 50, height: 25},
                 startX: 0,
-                startY: 40
+                startY: 40,
+                spriteCount: 8,
+                spriteTime: [250, 250, 250, 250, 250, 250, 250, 250]
 
             })
 

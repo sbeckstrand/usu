@@ -7,6 +7,12 @@ MyGame.objects.Flea = function(spec) {
     let start = {x: spec.startX, y: spec.startY}
     let animationTime = 0;
     let animationStage = 0;
+    let animationStarts = {
+        0: {x: 64, y: 32},
+        1: {x: 80, y: 32},
+        2: {x: 64, y: 40},
+        3: {x: 80, y: 40}
+    }
     
     image.onload = function() {
         imageReady = true;
@@ -14,7 +20,6 @@ MyGame.objects.Flea = function(spec) {
 
     function update(elapsedTime) {
         animationTime += elapsedTime;
-        console.log(animationStage);
 
 
         if (animationTime >= spec.spriteTime[animationStage]) {
@@ -26,15 +31,7 @@ MyGame.objects.Flea = function(spec) {
             }
         }
 
-        if (animationStage == 0) {
-            start = {x: 64, y: 32};
-        } else if (animationStage == 1) {
-            start = {x: 80, y: 32};
-        } else if (animationStage == 2) {
-            start = {x: 64, y: 40};
-        } else if (animationStage == 3) {
-            start = {x: 80, y: 40};
-        }
+        start = animationStarts[animationStage];
   
     }
     image.src = spec.imageSrc;
