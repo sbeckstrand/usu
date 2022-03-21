@@ -40,10 +40,13 @@ MyGame.objects.Flea = function(spec) {
             delete MyGame.flea;
         }
 
-        const currY = Math.floor((spec.center.y - 12.5) / spec.size.height);
-        const currX = Math.floor((spec.center.x - 12.5) / spec.size.width);
-        console.log(currY);
-        console.log(MyGame.mushroomGrid[currX][currY]);
+        const currY = Math.floor((spec.center.y - 12.5) / spec.size.height) + 1;
+        const currX = Math.floor((spec.center.x - 12.5) / spec.size.width) + 1;
+
+        // if (currX == MyGame.mushrooms[0].x && currY == MyGame.mushrooms[0].y) {
+        //     console.log(`x: ${currX}, y: ${currY}, mushX: ${MyGame.mushrooms[0].x}, y: ${MyGame.mushrooms[0].y}}`);
+        // }
+        // console.log(MyGame.mushroomGrid[currX - 1][currY - 1]);
   
     }
     image.src = spec.imageSrc;

@@ -23,7 +23,7 @@ MyGame.objects.Mushroom = function(spec) {
     function poison() {
         if (!poisoned) {
             poisoned = true;
-            start = {x: 64, y: 0};
+            start = {x: start.x, y: 0};
         }
     }
 

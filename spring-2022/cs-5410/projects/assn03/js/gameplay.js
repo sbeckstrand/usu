@@ -46,8 +46,8 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
     let playerTimer = 3000;
     let fleaTimer = 1000;
-    let spiderTimer = 1000;
-    let scorpionTimer = 1000;
+    let spiderTimer = 100000000;
+    let scorpionTimer = 1000000000;
     let gameOverTimer = 5000;
     let scoreSet = false;
 
@@ -131,16 +131,15 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
         if (fleaTimer <= 0) {
             const rand_x = Math.floor(Math.random() * 39) + 1;
-
             let flea = objects.Flea({
                 imageSrc: 'assets/sprites.png',
-                center: { x: (25 * rand_x) + 12.5, y: 50 + 12.5},
+                center: { x: (25 * (rand_x - 1)) + 12.5, y: 50 + 12.5},
                 size: { width: 25, height: 25},
                 startX: 64,
                 startY: 32,
                 spriteCount: 4,
                 spriteTime: [250, 250, 250, 250],
-                moveRate: 300 / 1000
+                moveRate: 50 / 1000
             })
 
             MyGame.flea = flea;
@@ -338,9 +337,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         MyGame.render.push(MyGame.PlayerIcon)
         // Build Mushroom Grid
         MyGame.mushroomGrid = [];
-        for (let i = 0; i < 40; i++) {
+        for (let i = 0; i < MyGame.graphics.canvas.width / 25; i++) {
             MyGame.mushroomGrid.push([]);
-            for (let j = 0; j < 40; j++) {
+            for (let j = 0; j < MyGame.graphics.canvas.width / 25; j++) {
                 MyGame.mushroomGrid[i].push(0)
             }
         }
@@ -349,7 +348,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
         // Generate initial 20 Mushrooms
         MyGame.mushrooms = []
-        for (let i = 0; i < 20; i++) {
+        for (let i = 0; i < 1; i++) {
 
             let placed = false
             while (!placed) {
@@ -374,7 +373,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
                 if (MyGame.mushroomGrid[rand_y][rand_x] == 0 && distance > 2 * mushroom.size.width) {
                     MyGame.mushrooms.push(mushroom);
-                    MyGame.mushroomGrid[rand_y][rand_x] = 1;
+                    MyGame.mushroomGrid[mushroom.x][mushroom.y] = 1;
                     placed = true;
                 }
 
