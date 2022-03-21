@@ -14,13 +14,22 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         position: { x: 20, y: 0 }
     });
 
+    let gameOverText = objects.Text({
+        text: "Game Over",
+        font: '48pt "Hubballi"',
+        fillStyle: 'rgba(255, 255, 255, 1)',
+        strokeStyle: 'rgba(0, 0, 0, 1)',
+        position: { x: MyGame.graphics.canvas.width / 3, y: MyGame.graphics.canvas.height / 3 }
+    })
+
     let player = objects.Player({
         imageSrc: 'assets/sprites.png',
         center: { x: graphics.canvas.width / 2, y: graphics.canvas.height * 0.85 },
         startX: 0,
         startY: 80,
         size: { width: 25, height: 25 },
-        moveRate: 300 / 1000    // pixels per millisecond
+        moveRate: 300 / 1000,    // pixels per millisecond
+        dead: false
     });
 
     let PlayerIcon = {
@@ -35,9 +44,12 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     PlayerIcon.image = new Image();
     PlayerIcon.image.src = PlayerIcon.imageSrc;
 
+    let playerTimer = 3000;
     let fleaTimer = 1000;
     let spiderTimer = 1000;
     let scorpionTimer = 1000;
+    let gameOverTimer = 5000;
+    let scoreSet = false;
 
     function processInput(elapsedTime) {
         myKeyboard.update(elapsedTime);
@@ -52,6 +64,63 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // Shot Updates
         MyGame.player.updateShots(elapsedTime);
         MyGame.player.handleShotCollisions();
+
+        // Player Collisions
+        const collisions = MyGame.player.checkForPlayerCollision();
+
+        if (!MyGame.player.dead) {
+            if (collisions[1]) {
+                MyGame.player.deathStatus(true);  
+
+                let death = new Audio('assets/death.wav')
+                death.play();
+
+            }
+        } else {
+            playerTimer -= elapsedTime;
+        }
+
+        // Revive
+        if (playerTimer <= 0) {
+            if (MyGame.lives != 0) {
+                MyGame.player.deathStatus(false);
+                playerTimer = 5000;
+                MyGame.lives -= 1;
+                MyGame.player.moveTo({x: graphics.canvas.width / 2, y: graphics.canvas.height * 0.85});
+                delete MyGame.spider;
+                delete MyGame.flea;
+            } else {
+                MyGame.game_over = true;
+
+               // Set High Score
+               if (!scoreSet) {
+                    if (typeof localStorage.highScores == "undefined" ) {
+                        let scores = [];
+                        scores.push(MyGame.score);
+                        localStorage.highScores = JSON.stringify(scores);
+
+                    } else if (JSON.parse(localStorage.highScores).length < 5) {
+                        let scores = JSON.parse(localStorage.highScores);
+                        scores.push(MyGame.score);
+                        scores = scores.sort((a,b) => b -a); // Sort by score value, descending
+                        localStorage.highScores = JSON.stringify(scores);
+                    } else {
+                        let scores = JSON.parse(localStorage.highScores);
+                        scores.push(MyGame.score)
+                        scores = scores.sort((a,b) => b -a);
+                        scores.pop();
+                        localStorage.highScores = JSON.stringify(scores);
+                    }
+
+                    scoreSet = true;
+               }
+            }
+        }
+
+
+        if (MyGame.game_over) {
+            gameOverTimer -= elapsedTime;
+        }
 
         // Flea
         if (fleaTimer > 0 && typeof MyGame.flea == "undefined") {
@@ -70,11 +139,12 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 startX: 64,
                 startY: 32,
                 spriteCount: 4,
-                spriteTime: [250, 250, 250, 250]
+                spriteTime: [250, 250, 250, 250],
+                moveRate: 300 / 1000
             })
 
             MyGame.flea = flea;
-            fleaTimer = 15000;
+            fleaTimer = 1000;
         }
 
         // Scorpion
@@ -95,16 +165,18 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
             let scorpion = objects.Scorpion({
                 imageSrc: 'assets/sprites.png',
-                center: { x: position_x, y: (25 * rand_y) + 25},
+                center: { x: position_x + 12.5, y: (25 * rand_y) + 25 + 12.5},
                 size: { width: 50, height: 25},
                 startX: 0,
                 startY: 56,
                 spriteCount: 4,
-                spriteTime: [250, 250, 250, 250]
+                spriteTime: [250, 250, 250, 250],
+                moveRate: 150 / 1000,
+                direction: direction
             })
 
             MyGame.scorpion = scorpion;
-            scorpionTimer = 60000;
+            scorpionTimer = 1000;
         }
 
         // Spider
@@ -130,12 +202,15 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 startX: 0,
                 startY: 40,
                 spriteCount: 8,
-                spriteTime: [250, 250, 250, 250, 250, 250, 250, 250]
+                spriteTime: [250, 250, 250, 250, 250, 250, 250, 250],
+                moveRate: 200 / 1000,
+                direction: [direction, "down"],
+                tempDirection: direction
 
             })
 
             MyGame.spider = spider;
-            spiderTimer = 10000;
+            spiderTimer = 1000;
         }
     }
 
@@ -143,7 +218,10 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         graphics.clear();
 
         // Render Player
-        renderer.Player.render(MyGame.player);
+        if (!MyGame.player.dead) {
+            renderer.Player.render(MyGame.player);
+        }
+        
 
         // Render Mushrooms
         for (const mushroom in MyGame.mushrooms) {
@@ -152,6 +230,15 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         
         // Render Text
         renderer.Text.render(myText);
+
+        if (MyGame.game_over) {
+            renderer.Text.render(gameOverText);
+        }
+
+        if (gameOverTimer <= 0) {
+            cancelNextRequest = true;
+            game.showScreen('main-menu');
+        }
 
         // Render Remaining Lives Indicator
         for (let i = 0; i < MyGame.lives; i++) {
@@ -227,21 +314,22 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
             game.showScreen('main-menu');
         });
 
-        MyGame.lives = 3
-        MyGame.shots = []
+        gameOverTimer = 5000;
+        scoreSet = false;
+        MyGame.game_over = false;
+        MyGame.score = 0;
+        MyGame.lives = 3;
+        MyGame.shots = [];
 
         if (typeof MyGame.flea != "undefined") {
-            fleaTimer = 1000;
             delete MyGame.flea;
         }
 
         if (typeof MyGame.spider != "undefined") {
-            spiderTimer = 1000;
             delete MyGame.spider;
         }
 
         if (typeof MyGame.scorpion != "undefined") {
-            scorpionTimer = 1000;
             delete MyGame.scorpion;
         }
 
@@ -277,7 +365,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                     center: { x: (25 * rand_x) - 12.5, y: (25 * rand_y) - 12.5},
                     size: { width: 25, height: 25},
                     startX: 64,
-                    startY: 8
+                    startY: 8,
+                    x: rand_x,
+                    y: rand_y
                 })
                 
                 const distance = Math.sqrt(Math.pow(Math.abs(player.center.x - mushroom.center.x), 2) + Math.pow(Math.abs(player.center.y - mushroom.center.y), 2))
@@ -294,7 +384,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
 
         input.Keyboard = myKeyboard;
+        console.log(player.dead);
         MyGame.player = player;
+        console.log(MyGame.player.dead);
         MyGame.PlayerIcon = PlayerIcon;
     }
 

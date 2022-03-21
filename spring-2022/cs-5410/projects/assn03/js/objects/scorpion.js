@@ -18,6 +18,18 @@ MyGame.objects.Scorpion = function(spec) {
         imageReady = true;
     };
 
+    function checkForMushroomCollision() {
+        for (const mushroom in MyGame.mushrooms) {
+            if (!MyGame.mushrooms[mushroom].poisoned) {
+
+                if (spec.center.y == MyGame.mushrooms[mushroom].center.y && Math.abs(spec.center.x - MyGame.mushrooms[mushroom].center.x) < 25 ) {
+                    MyGame.mushrooms[mushroom].poison();
+                }
+            }
+        }
+
+    }
+
     function update(elapsedTime) {
         animationTime += elapsedTime;
 
@@ -31,12 +43,25 @@ MyGame.objects.Scorpion = function(spec) {
         }
 
         start = animationStarts[animationStage];
+
+        if (spec.direction == "left") {
+            spec.center.x -= spec.moveRate * elapsedTime;
+        } else if (spec.direction == "right") {
+            spec.center.x += spec.moveRate * elapsedTime;
+        }
+
+        checkForMushroomCollision();
+
+        if (spec.center.x - (spec.size.width / 2) > MyGame.graphics.canvas.width || spec.center.x + (spec.size.width /2) < 0) {
+            delete MyGame.scorpion;
+        }
     }
 
     image.src = spec.imageSrc;
 
     let api = {
         update: update,
+        checkForMushroomCollision: checkForMushroomCollision,
         get type() { return type },
         get imageReady() { return imageReady; },
         get image() { return image; },

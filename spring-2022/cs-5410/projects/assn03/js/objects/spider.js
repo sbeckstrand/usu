@@ -36,6 +36,44 @@ MyGame.objects.Spider = function(spec) {
         }
 
         start = animationStarts[animationStage];
+
+        let moveDistance = spec.moveRate * elapsedTime;
+        
+        if (spec.center.x - (spec.size.width / 2) < 0) {
+            spec.direction[0] = "right";
+        }
+
+        if (spec.center.x + (spec.size.width / 2) > MyGame.graphics.canvas.width) {
+            spec.direction[0] = "left";
+        }
+
+        if (spec.center.y > MyGame.graphics.canvas.height * 0.9) {
+            spec.direction[1] = "up";
+            const randDirection = Math.round(Math.random())
+            spec.tempDirection = (randDirection == 1 ? spec.direction[0] : "none");
+        } 
+
+        if (spec.center.y < MyGame.graphics.canvas.height * 0.7) {
+            spec.direction[1] = "down";
+            const randDirection = Math.round(Math.random())
+            spec.tempDirection = (randDirection == 1 ? spec.direction[0] : "none");
+        }
+
+        if (spec.tempDirection == "left") {
+            spec.center.x -= spec.moveRate * elapsedTime;
+        } else if (spec.tempDirection == "right") {
+            spec.center.x += spec.moveRate * elapsedTime;
+        }
+
+
+        if (spec.direction[1] == "up") {
+            spec.center.y -= moveDistance;
+        } 
+
+        if (spec.direction[1] == "down") {
+            spec.center.y += moveDistance;
+        }
+
     }
 
     image.src = spec.imageSrc;

@@ -13,6 +13,7 @@ MyGame.objects.Flea = function(spec) {
         2: {x: 64, y: 40},
         3: {x: 80, y: 40}
     }
+    let previousY = 0;
     
     image.onload = function() {
         imageReady = true;
@@ -32,6 +33,17 @@ MyGame.objects.Flea = function(spec) {
         }
 
         start = animationStarts[animationStage];
+
+        spec.center.y += spec.moveRate * elapsedTime;
+
+        if (spec.center.y - (spec.size.height / 2 ) > MyGame.graphics.canvas.height) {
+            delete MyGame.flea;
+        }
+
+        const currY = Math.floor((spec.center.y - 12.5) / spec.size.height);
+        const currX = Math.floor((spec.center.x - 12.5) / spec.size.width);
+        console.log(currY);
+        console.log(MyGame.mushroomGrid[currX][currY]);
   
     }
     image.src = spec.imageSrc;

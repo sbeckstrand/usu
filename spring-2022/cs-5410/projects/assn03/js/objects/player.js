@@ -10,6 +10,7 @@ MyGame.objects.Player = function(spec) {
     let shotTimer = 5;
     let previousShotTime = 0;
     let start = {x: spec.startX, y: spec.startY};
+    let dead = spec.dead;
     
 
     image.onload = function() {
@@ -43,6 +44,23 @@ MyGame.objects.Player = function(spec) {
             const distance = Math.sqrt(Math.pow(Math.abs(spec.center.x - MyGame.mushrooms[mushroom].center.x), 2) + Math.pow(Math.abs(spec.center.y - MyGame.mushrooms[mushroom].center.y), 2))
             if (distance < (spec.size.width / 2) + (MyGame.mushrooms[mushroom].size.width / 2)) {
                 collision = true
+            }
+        }
+
+        if (typeof MyGame.spider != 'undefined') {
+            let distance = Math.sqrt(Math.pow(Math.abs(spec.center.x - MyGame.spider.center.x), 2) + Math.pow(Math.abs(spec.center.y - MyGame.spider.center.y), 2))
+            if (distance < (spec.size.width / 2) + (MyGame.spider.size.width / 2)) {
+                collision = true,
+                fatal = true;
+            }
+            
+        }
+
+        if (typeof MyGame.flea != 'undefined') {
+            let distance = Math.sqrt(Math.pow(Math.abs(spec.center.x - MyGame.flea.center.x), 2) + Math.pow(Math.abs(spec.center.y - MyGame.flea.center.y), 2))
+            if (distance < (spec.size.width / 2) + (MyGame.flea.size.width / 2)) {
+                collision = true,
+                fatal = true;
             }
         }
 
@@ -122,17 +140,10 @@ MyGame.objects.Player = function(spec) {
                     let mushroom = MyGame.mushrooms[mushroomIndex];
                     
                     mushroom.updateState();
-                    
-                    const mushroomState = mushroom.state;
-                    
-                    if (mushroomState == 2) {
-                        mushroom.updateStart({x: 72, y: 8});
-                    } else if (mushroomState == 3) {
-                        mushroom.updateStart({x: 80, y: 8});
-                    } else if (mushroomState == 4) {
-                        mushroom.updateStart({x: 88, y: 8});
-                    } else if (mushroomState > 4) {
+                    mushroom.updateStart({x: mushroom.start.x + 8, y: mushroom.start.y});
 
+                    if (mushroom.state > 4) {
+                        MyGame.mushroomGrid[mushroom.x][mushroom.y] = 0;
                         MyGame.mushrooms = MyGame.mushrooms.filter(element => element != mushroom);
                     }
                     MyGame.score += 1;
@@ -171,84 +182,100 @@ MyGame.objects.Player = function(spec) {
     function moveLeft(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
-        if (spec.center.x - (spec.size.width / 2) >= 0 + (spec.size.width / 2)  ) {
-            spec.center.x -= (spec.moveRate * elapsedTime);
-        } else if (spec.center.x != 0 + (spec.size.width / 2)) {
-            spec.center.x = 0 + (spec.size.width / 2);
+        if (!dead) {
+            if (spec.center.x - (spec.size.width / 2) >= 0 + (spec.size.width / 2)  ) {
+                spec.center.x -= (spec.moveRate * elapsedTime);
+            } else if (spec.center.x != 0 + (spec.size.width / 2)) {
+                spec.center.x = 0 + (spec.size.width / 2);
+            }
+    
+            if (checkForPlayerCollision()[0]) {
+    
+                spec.center.x = origin[0];
+                spec.center.y = origin[1];
+    
+            }
         }
-
-        if (checkForPlayerCollision()[0]) {
-
-            spec.center.x = origin[0];
-            spec.center.y = origin[1];
-        }
+        
         
     }
 
     function moveRight(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
-        // console.log(`${spec.center.x}, ${spec.center.y}`)
-        if (spec.center.x + (spec.size.width / 2) <= MyGame.graphics.canvas.width - (spec.size.width / 2)  ) {
-            spec.center.x += (spec.moveRate * elapsedTime);
-        } else if (spec.center.x != MyGame.graphics.canvas.width - (spec.size.width / 2)) {
-            spec.center.x = MyGame.graphics.canvas.width - (spec.size.width / 2);
+        if (!dead) { 
+            if (spec.center.x + (spec.size.width / 2) <= MyGame.graphics.canvas.width - (spec.size.width / 2)  ) {
+                spec.center.x += (spec.moveRate * elapsedTime);
+            } else if (spec.center.x != MyGame.graphics.canvas.width - (spec.size.width / 2)) {
+                spec.center.x = MyGame.graphics.canvas.width - (spec.size.width / 2);
+            }
+    
+            if (checkForPlayerCollision()[0]) {
+                spec.center.x = origin[0];
+                spec.center.y = origin[1];
+            }
         }
-
-        if (checkForPlayerCollision()[0]) {
-            spec.center.x = origin[0];
-            spec.center.y = origin[1];
-        }
+        
     }
 
     function moveUp(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
-        // console.log(`${spec.center.x}, ${spec.center.y}`)
-        if (spec.center.y - (spec.size.height / 2) >= (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
-            spec.center.y -= (spec.moveRate * elapsedTime);
-        } else if (spec.center.y != (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
-            spec.center.y = (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)
+        if (!dead) {
+            if (spec.center.y - (spec.size.height / 2) >= (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
+                spec.center.y -= (spec.moveRate * elapsedTime);
+            } else if (spec.center.y != (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)) {
+                spec.center.y = (MyGame.graphics.canvas.width * 0.75) + (spec.size.height / 2)
+            }
+            
+            if (checkForPlayerCollision()[0]) {
+                spec.center.x = origin[0];
+                spec.center.y = origin[1];
+            }
         }
         
-        if (checkForPlayerCollision()[0]) {
-            spec.center.x = origin[0];
-            spec.center.y = origin[1];
-        }
     }
 
     function moveDown(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
-        // console.log(`${spec.center.x}, ${spec.center.y}`)
-        if (spec.center.y + (spec.size.height / 2) <= (MyGame.graphics.canvas.height * 0.90) - (spec.size.height / 2)) {
-            spec.center.y += (spec.moveRate * elapsedTime);
-        } else if (spec.center.y != MyGame.graphics.canvas.height - (spec.size.height / 2)) {
-            spec.center.y = (MyGame.graphics.canvas.height * 0.90) - (spec.size.height / 2);
+        if (!dead) { 
+            if (spec.center.y + (spec.size.height / 2) <= (MyGame.graphics.canvas.height * 0.90) - (spec.size.height / 2)) {
+                spec.center.y += (spec.moveRate * elapsedTime);
+            } else if (spec.center.y != MyGame.graphics.canvas.height - (spec.size.height / 2)) {
+                spec.center.y = (MyGame.graphics.canvas.height * 0.90) - (spec.size.height / 2);
+            }
+    
+            if (checkForPlayerCollision()[0]) {
+                spec.center.x = origin[0];
+                spec.center.y = origin[1];
+            }
         }
-
-        if (checkForPlayerCollision()[0]) {
-            spec.center.x = origin[0];
-            spec.center.y = origin[1];
-        }
+        
+        
     }
 
     function shoot(elapsedTime) {
-        if (readyToShoot) {
+        if (!dead) {  
+            if (readyToShoot) {
             
-            readyToShoot = false; 
-            shotTimer = 100;
-
-            let shotAudio = new Audio('assets/laser.wav')
-            shotAudio.play();
-
-            MyGame.shots.push({
-                x: spec.center.x,
-                y: spec.center.y
-            })
-            MyGame.in
+                readyToShoot = false; 
+                shotTimer = 150;
+    
+                let shotAudio = new Audio('assets/laser.wav')
+                shotAudio.play();
+    
+                MyGame.shots.push({
+                    x: spec.center.x,
+                    y: spec.center.y
+                })
+                MyGame.in
+            }
         }
-        
+    }
+
+    function deathStatus(status) {
+        dead = status;
     }
 
     function moveTo(pos) {
@@ -264,15 +291,18 @@ MyGame.objects.Player = function(spec) {
         moveDown: moveDown,
         moveTo: moveTo,
         shoot: shoot,
+        checkForPlayerCollision: checkForPlayerCollision,
         checkForShotCollision: checkForShotCollision,
         updateShots: updateShots,
         handleShotCollisions: handleShotCollisions,
+        deathStatus: deathStatus,
         get imageReady() { return imageReady; },
         get rotation() { return rotation; },
         get image() { return image; },
         get center() { return spec.center; },
         get size() { return spec.size; },
-        get start() { return start; }
+        get start() { return start; },
+        get dead() { return dead },
     };
 
     return api;

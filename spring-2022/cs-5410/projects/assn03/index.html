@@ -51,10 +51,6 @@
                         <div id="high-scores" class="screen text-light text-center">
                             <h1>High Scores</h1>
                             <ol>
-                                <li>10000</li>
-                                <li>9000</li>
-                                <li>8000</li>
-                                <li>7000</li>
                             </ol>
                             <ul class="menu">
                                 <li><button class="btn btn-outline-primary mt-3" id="high-scores-back">Back</button></li>
@@ -141,6 +137,7 @@
 
         <script>
             let MyGame = {
+                game_over: false,
                 score: 0,
                 lives: 0,
                 player: {},
