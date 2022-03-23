@@ -1,18 +1,8 @@
-// ------------------------------------------------------------------
-// 
-// This is the game object.  Everything about the game is located in 
-// this object.
-//
-// ------------------------------------------------------------------
-
+// Overall wrapper for the game and menu
 MyGame.game = (function(screens) {
     'use strict';
     
-    //------------------------------------------------------------------
-    //
-    // This function is used to change to a new active screen.
-    //
-    //------------------------------------------------------------------
+    // Show specific screen
     function showScreen(id) {
         //
         // Remove the active state from all screens.  There should only be one...
@@ -28,11 +18,6 @@ MyGame.game = (function(screens) {
         document.getElementById(id).classList.add('active');
     }
 
-    //------------------------------------------------------------------
-    //
-    // This function performs the one-time game initialization.
-    //
-    //------------------------------------------------------------------
     function initialize() {
         let screen = null;
         //
@@ -43,8 +28,6 @@ MyGame.game = (function(screens) {
             }
         }
         
-        //
-        // Make the main-menu screen the active one
         showScreen('main-menu');
     }
     

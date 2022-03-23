@@ -1,3 +1,4 @@
+// Render Mushroom Object
 MyGame.render.Mushroom = (function(graphics) {
     'use strict';
 

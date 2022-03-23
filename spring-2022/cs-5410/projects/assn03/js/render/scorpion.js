@@ -1,3 +1,4 @@
+// Render Scorpion Object
 MyGame.render.Scorpion = (function(graphics) {
     'use strict';
 

@@ -1,3 +1,4 @@
+// Render Spider Object
 MyGame.render.Spider = (function(graphics) {
     'use strict';
 

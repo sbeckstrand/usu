@@ -1,32 +1,15 @@
-// --------------------------------------------------------------
-//
-// Creates a Text object, with functions for managing state.
-//
-// spec = {
-//    text: ,
-//    font: ,
-//    fillStyle: ,
-//    strokeStyle: ,
-//    position: { x: , y: }
-// }
-//
-// --------------------------------------------------------------
+// Create text object. 
 MyGame.objects.Text = function(spec) {
     'use strict';
 
     let rotation = 0;
     let text = spec.text;
 
-    function updateRotation(howMuch) {
-        rotation += howMuch;
-    }
-
     function setText(new_text) {
         text = new_text;
     }
 
     let api = {
-        updateRotation: updateRotation,
         setText: setText,
         get rotation() { return rotation; },
         get position() { return spec.position; },

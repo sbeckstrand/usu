@@ -28,7 +28,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         startX: 0,
         startY: 80,
         size: { width: 25, height: 25 },
-        moveRate: 300 / 1000,    // pixels per millisecond
+        moveRate: 400 / 1000,    // pixels per millisecond
         dead: false
     });
 
@@ -45,11 +45,13 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
     PlayerIcon.image.src = PlayerIcon.imageSrc;
 
     let playerTimer = 3000;
-    let fleaTimer = 1000;
-    let spiderTimer = 100000000;
-    let scorpionTimer = 1000000000;
+    let fleaTimer = 4000;
+    let spiderTimer = 2000;
+    let scorpionTimer = 10000;
     let gameOverTimer = 5000;
+    let centipedeTimer = 5000;
     let scoreSet = false;
+    
 
     function processInput(elapsedTime) {
         myKeyboard.update(elapsedTime);
@@ -87,6 +89,9 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 playerTimer = 5000;
                 MyGame.lives -= 1;
                 MyGame.player.moveTo({x: graphics.canvas.width / 2, y: graphics.canvas.height * 0.85});
+
+                buildCentipede();
+
                 delete MyGame.spider;
                 delete MyGame.flea;
             } else {
@@ -122,6 +127,20 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
             gameOverTimer -= elapsedTime;
         }
 
+        // Centipede
+        if (MyGame.centipede.length > 0) {
+            for (const seg in MyGame.centipede) {
+                MyGame.centipede[seg].update(elapsedTime);
+            }
+        } else {
+            centipedeTimer -= elapsedTime;
+        }
+
+        if (centipedeTimer <= 0) {
+            buildCentipede();
+            centipedeTimer = 5000;
+        }
+        
         // Flea
         if (fleaTimer > 0 && typeof MyGame.flea == "undefined") {
             fleaTimer -= elapsedTime;
@@ -139,11 +158,11 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
                 startY: 32,
                 spriteCount: 4,
                 spriteTime: [250, 250, 250, 250],
-                moveRate: 50 / 1000
+                moveRate: 300 / 1000
             })
 
             MyGame.flea = flea;
-            fleaTimer = 1000;
+            fleaTimer = 4000;
         }
 
         // Scorpion
@@ -175,7 +194,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
             })
 
             MyGame.scorpion = scorpion;
-            scorpionTimer = 1000;
+            scorpionTimer = 10000;
         }
 
         // Spider
@@ -209,7 +228,7 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
             })
 
             MyGame.spider = spider;
-            spiderTimer = 1000;
+            spiderTimer = 2000;
         }
     }
 
@@ -219,6 +238,11 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
         // Render Player
         if (!MyGame.player.dead) {
             renderer.Player.render(MyGame.player);
+        }
+
+        // Render Centipede
+        for (const seg in MyGame.centipede) {
+            renderer.Centipede.render(MyGame.centipede[seg]);
         }
         
 
@@ -348,13 +372,13 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
 
         // Generate initial 20 Mushrooms
         MyGame.mushrooms = []
-        for (let i = 0; i < 1; i++) {
+        for (let i = 0; i < 20; i++) {
 
             let placed = false
             while (!placed) {
                 const rand_x = Math.floor(Math.random() * 39) + 1;
                 let rand_y = 0;
-                while (rand_y < 4) {
+                while (rand_y < 5) {
                     rand_y = Math.floor(Math.random() * 34) + 1;
                 }
                 
@@ -381,11 +405,12 @@ MyGame.screens['game-play'] = (function(game, objects, renderer, graphics, input
             
         }
 
+        // Generate initial centipede
+        buildCentipede();
+
 
         input.Keyboard = myKeyboard;
-        console.log(player.dead);
         MyGame.player = player;
-        console.log(MyGame.player.dead);
         MyGame.PlayerIcon = PlayerIcon;
     }
 

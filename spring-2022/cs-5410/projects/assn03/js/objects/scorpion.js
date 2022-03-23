@@ -18,6 +18,7 @@ MyGame.objects.Scorpion = function(spec) {
         imageReady = true;
     };
 
+    // Check if scorpion has collided with mushroom. If so, mark it as poisonous. 
     function checkForMushroomCollision() {
         for (const mushroom in MyGame.mushrooms) {
             if (!MyGame.mushrooms[mushroom].poisoned) {
@@ -30,7 +31,9 @@ MyGame.objects.Scorpion = function(spec) {
 
     }
 
+    // Update Scorpion object with each frame
     function update(elapsedTime) {
+        // Set animation stage
         animationTime += elapsedTime;
 
         if (animationTime >= spec.spriteTime[animationStage]) {
@@ -42,8 +45,10 @@ MyGame.objects.Scorpion = function(spec) {
             }
         }
 
+        // Change animation based on stage
         start = animationStarts[animationStage];
 
+        // Move the Scorpion
         if (spec.direction == "left") {
             spec.center.x -= spec.moveRate * elapsedTime;
         } else if (spec.direction == "right") {
@@ -52,6 +57,7 @@ MyGame.objects.Scorpion = function(spec) {
 
         checkForMushroomCollision();
 
+        // Delete scorpion once off screen
         if (spec.center.x - (spec.size.width / 2) > MyGame.graphics.canvas.width || spec.center.x + (spec.size.width /2) < 0) {
             delete MyGame.scorpion;
         }

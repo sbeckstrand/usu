@@ -1,15 +1,4 @@
-// --------------------------------------------------------------
-//
-// Renders a Logo object.
-//
-// spec = {
-//    image: ,
-//    center: { x: , y: },
-//    size: { width: , height: }
-// }
-//
-// --------------------------------------------------------------
-
+// Render the Player object and extra lives
 MyGame.render.Player = (function(graphics) {
     'use strict';
 

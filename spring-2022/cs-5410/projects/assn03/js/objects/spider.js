@@ -1,3 +1,4 @@
+// Create Spider Object. 
 MyGame.objects.Spider = function(spec) {
     'use strict';
 
@@ -8,6 +9,7 @@ MyGame.objects.Spider = function(spec) {
     let animationTime = 0;
     let animationStage = 0;
 
+    // Set sprites for each animation stage
     let animationStarts = {
         0: {x: 0,  y: 32},
         1: {x: 0,  y: 40},
@@ -23,7 +25,9 @@ MyGame.objects.Spider = function(spec) {
         imageReady = true;
     };
 
+    // Update spider object with each cycle
     function update(elapsedTime) {
+        // Update animatino stage
         animationTime += elapsedTime;
 
         if (animationTime >= spec.spriteTime[animationStage]) {
@@ -35,8 +39,10 @@ MyGame.objects.Spider = function(spec) {
             }
         }
 
+        // Update animation based on stage
         start = animationStarts[animationStage];
 
+        // Move the spider
         let moveDistance = spec.moveRate * elapsedTime;
         
         if (spec.center.x - (spec.size.width / 2) < 0) {

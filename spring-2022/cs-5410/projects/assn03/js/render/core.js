@@ -1,3 +1,4 @@
+// Used to render a full image or a sub portion of an image
 MyGame.graphics = (function() {
     'use strict';
     let canvas = document.getElementById('game-canvas');

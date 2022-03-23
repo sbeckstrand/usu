@@ -1,3 +1,4 @@
+// Create Mushroom object
 MyGame.objects.Mushroom = function(spec) {
     'use strict';
 
@@ -12,14 +13,17 @@ MyGame.objects.Mushroom = function(spec) {
         imageReady = true;
     };
 
+    // Function used to update state when mushroom is hit with shot
     function updateState() {
         state += 1;
     }
 
+    // Update the position of image to grab sprite
     function updateStart(updatedStart) {
         start = updatedStart;
     }
 
+    // Mark if mushroom is poisonous
     function poison() {
         if (!poisoned) {
             poisoned = true;

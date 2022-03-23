@@ -22,6 +22,7 @@ MyGame.objects.Player = function(spec) {
         rotation += diff;
     }
 
+    // Update the timer for how often you can shoot and move shots up the screen
     function updateShots(elapsedTime) {
         // Update shot timer
         if (shotTimer > 0) {
@@ -37,12 +38,21 @@ MyGame.objects.Player = function(spec) {
         }
     }
 
+    // Check for any collisions with objects. All objects besides mushrooms are fatal. 
     function checkForPlayerCollision() {
         let collision = false;
         let fatal = false;
         for (const mushroom in MyGame.mushrooms) {
             const distance = Math.sqrt(Math.pow(Math.abs(spec.center.x - MyGame.mushrooms[mushroom].center.x), 2) + Math.pow(Math.abs(spec.center.y - MyGame.mushrooms[mushroom].center.y), 2))
             if (distance < (spec.size.width / 2) + (MyGame.mushrooms[mushroom].size.width / 2)) {
+                collision = true
+            }
+        }
+
+        for (const seg in MyGame.centipede) {
+            const distance = Math.sqrt(Math.pow(Math.abs(spec.center.x - MyGame.centipede[seg].center.x), 2) + Math.pow(Math.abs(spec.center.y - MyGame.centipede[seg].center.y), 2))
+            if (distance < (spec.size.width / 2) + (MyGame.centipede[seg].size.width / 2)) {
+                fatal = true;
                 collision = true
             }
         }
@@ -64,10 +74,13 @@ MyGame.objects.Player = function(spec) {
             }
         }
 
+
+
         return [collision, fatal]
         
     }
 
+    // Check for objects shots have collided with
     function checkForShotCollision() {
         let shotCollisions = [];
         
@@ -78,6 +91,11 @@ MyGame.objects.Player = function(spec) {
                 all_objects.push(MyGame.mushrooms[mushroom]);
 
             }
+
+            for (let seg in MyGame.centipede) {
+                all_objects.push(MyGame.centipede[seg])
+            }
+            
 
             if (typeof MyGame.spider != 'undefined') {
                 all_objects.push(MyGame.spider);
@@ -90,6 +108,7 @@ MyGame.objects.Player = function(spec) {
             if (typeof MyGame.flea != 'undefined') {
                 all_objects.push(MyGame.flea);
             }
+
 
             for (const obj in all_objects) {
                 let inXBound = false;
@@ -121,6 +140,7 @@ MyGame.objects.Player = function(spec) {
         return shotCollisions;
     }
 
+    // Handle collisions with shots. 
     function handleShotCollisions() {
         const collisions = checkForShotCollision()
         if (Object.keys(collisions).length > 0) {
@@ -147,6 +167,32 @@ MyGame.objects.Player = function(spec) {
                         MyGame.mushrooms = MyGame.mushrooms.filter(element => element != mushroom);
                     }
                     MyGame.score += 1;
+                }
+
+                if (collision_object.type == "centipede"){
+
+                    let creatureHit = new Audio('assets/creaturehit.wav')
+                    creatureHit.play()
+                    
+                    MyGame.centipede = MyGame.centipede.filter(elm => collision_object.id != elm.id);
+                    const hitX = Math.floor((collision_object.center.x - (collision_object.size.width / 2)) / 25) + 1;
+                    const hitY = Math.floor((collision_object.center.y - (collision_object.size.height / 2)) / 25) + 1;
+
+                    if (MyGame.mushroomGrid[hitX][hitY] == 0){
+                        const newMushroom = MyGame.objects.Mushroom({
+                            imageSrc: 'assets/sprites.png',
+                            center: { x: (25 * hitX) - 12.5, y: (25 * hitY) - 12.5},
+                            size: { width: 25, height: 25},
+                            startX: 64,
+                            startY: 8,
+                            x: hitX,
+                            y: hitY
+                        })
+
+                        MyGame.mushrooms.push(newMushroom);
+                        MyGame.mushroomGrid[newMushroom.x][newMushroom.y] = 1;
+                    }
+                    MyGame.score += 200;
                 }
 
                 
@@ -179,6 +225,7 @@ MyGame.objects.Player = function(spec) {
         }
     }
 
+    // Move character left
     function moveLeft(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
@@ -200,6 +247,7 @@ MyGame.objects.Player = function(spec) {
         
     }
 
+    // Move character right
     function moveRight(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
@@ -218,6 +266,7 @@ MyGame.objects.Player = function(spec) {
         
     }
 
+    // Move character up
     function moveUp(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
@@ -236,6 +285,7 @@ MyGame.objects.Player = function(spec) {
         
     }
 
+    // Move character down
     function moveDown(elapsedTime) {
         const origin = [spec.center.x, spec.center.y]
 
@@ -255,6 +305,7 @@ MyGame.objects.Player = function(spec) {
         
     }
 
+    // Shoot shot
     function shoot(elapsedTime) {
         if (!dead) {  
             if (readyToShoot) {
@@ -274,10 +325,12 @@ MyGame.objects.Player = function(spec) {
         }
     }
 
+    // Update status of player to indicate if dead or not
     function deathStatus(status) {
         dead = status;
     }
 
+    // Move player to specific position
     function moveTo(pos) {
         spec.center.x = pos.x;
         spec.center.y = pos.y;

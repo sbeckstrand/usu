@@ -1,9 +1,4 @@
-// --------------------------------------------------------------
-//
-// Renders a Text object.
-//
-//
-// --------------------------------------------------------------
+// Render Text Object
 MyGame.render.Text = (function(graphics) {
     'use strict';
 

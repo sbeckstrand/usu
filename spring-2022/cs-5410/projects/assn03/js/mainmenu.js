@@ -15,7 +15,6 @@ MyGame.screens['main-menu'] = (function(game) {
             function() { 
                 game.showScreen('high-scores'); 
                 MyGame.screens["high-scores"].updateScores();
-                console.log("high")
             });
         
         document.getElementById('controls-btn').addEventListener(

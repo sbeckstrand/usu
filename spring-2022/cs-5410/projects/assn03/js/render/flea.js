@@ -1,3 +1,4 @@
+// Render Flea Object
 MyGame.render.Flea = (function(graphics) {
     'use strict';
 
