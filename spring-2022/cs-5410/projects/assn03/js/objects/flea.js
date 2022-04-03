@@ -66,7 +66,7 @@ MyGame.objects.Flea = function(spec) {
 
         if (processed[currX][currY] == 0) {
             const randomChance = Math.random()
-            if (randomChance < 0.25 && currY < 35 && currY > 4) {
+            if (randomChance < 0.15 && currY < 35 && currY > 4) {
                 let placed = false;
                 if (Math.abs(MyGame.player.center.y - spec.center.y) >=  MyGame.player.size.height * 2) {
                     let attempts = 0;
